@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ../static/css/dist/styles.css --watch",
+    "build:clean": "rimraf ../static/css/dist",
+    "build:tailwind": "cross-env NODE_ENV=production tailwindcss -i ./src/input.css -o ../static/css/dist/styles.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "cross-env": "^7.0.3",
+    "rimraf": "^5.0.0"
+  }
+}

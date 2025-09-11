@@ -1,0 +1,380 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Settings & Administration - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Settings & Administration</h1>
+        <p class="text-gray-600">User Management and System Configuration</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- User Management -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <i data-lucide="users" class="w-5 h-5 text-blue-600 mr-2"></i>
+                    <h2 class="text-lg font-semibold text-gray-900">User Management</h2>
+                </div>
+                <button class="px-3 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                    <i data-lucide="plus" class="w-4 h-4 inline mr-1"></i>Add User
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- User Roles -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-3">User Roles</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Supervisor</div>
+                                <div class="text-xs text-blue-700">Full access to all modules and user management</div>
+                            </div>
+                            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">3 users</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Analyst</div>
+                                <div class="text-xs text-blue-700">Read/write access to analysis modules</div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">8 users</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Admin</div>
+                                <div class="text-xs text-blue-700">System administration and configuration</div>
+                            </div>
+                            <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">2 users</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Users -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                    <h4 class="font-medium text-green-900 mb-3">Active Users</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                                    <i data-lucide="user" class="w-4 h-4 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-green-900">John Smith</div>
+                                    <div class="text-xs text-green-700">Supervisor • Last active: 2 min ago</div>
+                                </div>
+                            </div>
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                                    <i data-lucide="user" class="w-4 h-4 text-green-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-green-900">Sarah Johnson</div>
+                                    <div class="text-xs text-green-700">Analyst • Last active: 15 min ago</div>
+                                </div>
+                            </div>
+                            <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                                    <i data-lucide="user" class="w-4 h-4 text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-medium text-green-900">Mike Wilson</div>
+                                    <div class="text-xs text-green-700">Analyst • Last active: 1 hour ago</div>
+                                </div>
+                            </div>
+                            <span class="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Statistics -->
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">User Statistics</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-blue-600">13</div>
+                            <div class="text-gray-600">Total Users</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-green-600">11</div>
+                            <div class="text-gray-600">Active Today</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security & Access Controls -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="shield" class="w-5 h-5 text-red-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Security & Access Controls</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Password Policy -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Password Policy</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-red-700">Minimum Length</span>
+                            <span class="font-medium text-red-900">12 characters</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-red-700">Complexity Requirements</span>
+                            <span class="font-medium text-red-900">Enabled</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-red-700">Expiration Period</span>
+                            <span class="font-medium text-red-900">90 days</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-red-700">Failed Attempts Limit</span>
+                            <span class="font-medium text-red-900">5 attempts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Access Controls -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+                    <h4 class="font-medium text-yellow-900 mb-3">Access Controls</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-yellow-700">Session Timeout</span>
+                            <span class="font-medium text-yellow-900">30 minutes</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-yellow-700">IP Whitelist</span>
+                            <span class="font-medium text-yellow-900">Enabled</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-yellow-700">Two-Factor Authentication</span>
+                            <span class="font-medium text-yellow-900">Required</span>
+                        </div>
+                        <div class="flex items-center justify-between text-sm">
+                            <span class="text-yellow-700">Audit Logging</span>
+                            <span class="font-medium text-yellow-900">Enabled</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Alerts -->
+                <div class="bg-orange-50 border border-orange-200 rounded-md p-4">
+                    <h4 class="font-medium text-orange-900 mb-3">Security Alerts</h4>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-orange-900">Failed Login Attempts</div>
+                                <div class="text-xs text-orange-700">3 attempts from unknown IP in last hour</div>
+                            </div>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded">Warning</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-orange-900">Password Expiry</div>
+                                <div class="text-xs text-orange-700">2 users have passwords expiring soon</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Info</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Setup -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 lg:col-span-2">
+            <div class="flex items-center mb-4">
+                <i data-lucide="link" class="w-5 h-5 text-purple-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Integration Setup</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Data Feeds from Insurers -->
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
+                    <h4 class="font-medium text-purple-900 mb-3">Data Feeds from Insurers</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Insurer A - API Feed</div>
+                                <div class="text-xs text-purple-700">Real-time data • Last sync: 2 min ago</div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Active</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Insurer B - FTP Feed</div>
+                                <div class="text-xs text-purple-700">Daily batch • Last sync: 6 hours ago</div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Active</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Insurer C - Manual Upload</div>
+                                <div class="text-xs text-purple-700">Weekly upload • Last sync: 3 days ago</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Pending</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Systems -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-3">External Systems</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Regulatory Database</div>
+                                <div class="text-xs text-blue-700">Solvency II reporting • Auto-sync</div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Connected</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Industry Benchmarking</div>
+                                <div class="text-xs text-blue-700">Peer comparison data • Monthly</div>
+                            </div>
+                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Connected</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-medium text-blue-900">Market Data Provider</div>
+                                <div class="text-xs text-blue-700">Real-time market data • API</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">Limited</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Integration Status -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                    <h4 class="font-medium text-green-900 mb-3">Integration Status</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Total Integrations</span>
+                            <span class="font-medium text-green-900">8</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Active Connections</span>
+                            <span class="font-medium text-green-900">6</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Data Sync Success Rate</span>
+                            <span class="font-medium text-green-900">94.2%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Last System Check</span>
+                            <span class="font-medium text-green-900">2 min ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration Configuration -->
+            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">Integration Configuration</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">New Data Feed</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                            <option>Select Insurer</option>
+                            <option>Insurer D - API Feed</option>
+                            <option>Insurer E - FTP Feed</option>
+                            <option>Insurer F - Manual Upload</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Sync Frequency</label>
+                        <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                            <option>Real-time</option>
+                            <option>Every 15 minutes</option>
+                            <option>Hourly</option>
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button class="px-4 py-2 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700">
+                        <i data-lucide="plus" class="w-4 h-4 inline mr-1"></i>Add Integration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Configuration -->
+    <div class="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center mb-4">
+            <i data-lucide="settings" class="w-5 h-5 text-gray-600 mr-2"></i>
+            <h2 class="text-lg font-semibold text-gray-900">System Configuration</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">General Settings</h4>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">System Timezone</span>
+                        <span class="font-medium text-gray-900">UTC+1 (CET)</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Date Format</span>
+                        <span class="font-medium text-gray-900">DD/MM/YYYY</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Currency</span>
+                        <span class="font-medium text-gray-900">EUR (€)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">Data Retention</h4>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Audit Logs</span>
+                        <span class="font-medium text-gray-900">7 years</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Report History</span>
+                        <span class="font-medium text-gray-900">5 years</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">User Sessions</span>
+                        <span class="font-medium text-gray-900">90 days</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">System Health</h4>
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Uptime</span>
+                        <span class="font-medium text-green-600">99.9%</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Database Size</span>
+                        <span class="font-medium text-gray-900">2.3 GB</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Last Backup</span>
+                        <span class="font-medium text-gray-900">2 hours ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

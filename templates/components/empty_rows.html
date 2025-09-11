@@ -1,0 +1,8 @@
+{% load dictionary_tags %}
+{% for rows in empty_rows|range_filter %}
+	<tr>
+        {% for col in empty_cols|range_filter %}
+            <td class="h-[37px]"></td>
+        {% endfor %}
+    </tr>
+{% endfor %}

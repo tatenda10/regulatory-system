@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IPEC{% endblock %}</title>
+    {% load static %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/dist/styles.css' %}">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; /* xs = 12px */
+        }
+        
+        /* Mobile sidebar toggle */
+        .sidebar-mobile {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .sidebar-mobile.open {
+            transform: translateX(0);
+        }
+        
+        /* Prevent body scrolling */
+        body {
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* Fixed positioning for sidebar and navbar */
+        .sidebar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 16rem; /* 64 * 4 = 256px (w-64) */
+            overflow: hidden; /* Prevent sidebar scrolling */
+            z-index: 40;
+        }
+        
+        /* Ensure sidebar content doesn't scroll */
+        #sidebar {
+            overflow: hidden !important;
+            max-height: 100vh !important;
+        }
+        
+        #sidebar nav {
+            overflow: hidden !important;
+            max-height: calc(100vh - 200px) !important; /* Account for header and footer */
+        }
+        
+        /* Enhanced hover and active states */
+        .sidebar-link {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .sidebar-link:hover {
+            background-color: #f3f4f6;
+            transform: translateX(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-link.active {
+            background-color: #dbeafe;
+            color: #2563eb;
+            border-left: 3px solid #2563eb;
+            transform: translateX(2px);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+        }
+        
+        .sidebar-link.active:hover {
+            background-color: #bfdbfe;
+        }
+        
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 16rem; /* 64 * 4 = 256px (w-64) */
+            z-index: 50;
+        }
+        
+        .content-with-fixed {
+            position: fixed;
+            top: 4rem; /* 16 * 4 = 64px (py-4) */
+            left: 16rem; /* 64 * 4 = 256px (w-64) */
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 1023px) {
+            .navbar-fixed {
+                left: 0;
+            }
+            
+            .content-with-fixed {
+                left: 0;
+                top: 4rem;
+            }
+        }
+        
+        /* Responsive text sizing */
+        @media (max-width: 640px) {
+            * {
+                font-size: 0.7rem; /* Even smaller on mobile */
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            * {
+                font-size: 0.8rem; /* Slightly larger on desktop */
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-gray-50">
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="lg:hidden fixed top-4 left-4 z-50 p-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar-mobile sidebar-fixed lg:translate-x-0 bg-white shadow-lg border-r border-gray-200">
+        <!-- Mobile Close Button -->
+        <div class="lg:hidden flex justify-end p-4 border-b border-gray-200">
+            <button id="mobile-close-button" class="p-2 text-gray-400 hover:text-gray-600 rounded-md">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+        
+        <!-- Logo Section -->
+        <div class="px-6 py-2">
+            <h1 class="text-2xl font-bold text-blue-600">Regulatory System</h1>
+        </div>
+        
+        <!-- Navigation Menu -->
+        <nav class="mt-4 px-3">
+            <div class="space-y-0.5">
+                    <!-- 1. Dashboard (Main Overview) -->
+                    <a href="{% url 'core:dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'dashboard' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="bar-chart-3" class="w-4 h-4 mr-3"></i>
+                        Dashboard
+                    </a>
+                    
+                    <!-- 2. Financial Performance & Position -->
+                    <a href="{% url 'core:financial-performance' %}" class="sidebar-link {% if request.resolver_match.url_name == 'financial-performance' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'financial-performance' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="trending-up" class="w-4 h-4 mr-3"></i>
+                        Financial Performance
+                    </a>
+                    
+                    <!-- 3. Profitability & Risk -->
+                    <a href="{% url 'core:profitability-risk' %}" class="sidebar-link {% if request.resolver_match.url_name == 'profitability-risk' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'profitability-risk' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="shield-alert" class="w-4 h-4 mr-3"></i>
+                        Profitability & Risk
+                    </a>
+                    
+                    <!-- 4. Liquidity & Solvency -->
+                    <a href="{% url 'core:liquidity-solvency' %}" class="sidebar-link {% if request.resolver_match.url_name == 'liquidity-solvency' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'liquidity-solvency' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="droplets" class="w-4 h-4 mr-3"></i>
+                        Liquidity & Solvency
+                    </a>
+                    
+                    <!-- 5. Compliance & Supervisory Alerts -->
+                    <a href="{% url 'core:compliance-alerts' %}" class="sidebar-link {% if request.resolver_match.url_name == 'compliance-alerts' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'compliance-alerts' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 mr-3"></i>
+                        Supervisory Alerts
+                    </a>
+                    
+                    <!-- 6. Peer & Industry Comparison -->
+                    <a href="{% url 'core:industry-comparison' %}" class="sidebar-link {% if request.resolver_match.url_name == 'industry-comparison' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'industry-comparison' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="users" class="w-4 h-4 mr-3"></i>
+                        Industry Comparison
+                    </a>
+                    
+                    <!-- 7. Data & Validation -->
+                    <a href="{% url 'core:data-validation' %}" class="sidebar-link {% if request.resolver_match.url_name == 'data-validation' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'data-validation' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="database" class="w-4 h-4 mr-3"></i>
+                        Data & Validation
+                    </a>
+                    
+                    <!-- 8. Reports & Exports -->
+                    <a href="{% url 'core:reports-exports' %}" class="sidebar-link {% if request.resolver_match.url_name == 'reports-exports' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'reports-exports' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                        Reports & Exports
+                    </a>
+                    
+                    <!-- 9. Settings & Administration -->
+                    <a href="{% url 'core:settings-admin' %}" class="sidebar-link {% if request.resolver_match.url_name == 'settings-admin' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'settings-admin' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="settings" class="w-4 h-4 mr-3"></i>
+                        Settings
+                    </a>
+                </div>
+            </nav>
+            
+        <!-- Logout Section -->
+        <div class="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-200">
+            <a href="{% url 'core:logout' %}" class="sidebar-link flex items-center px-3 py-2 text-sm font-medium text-gray-600 rounded-md">
+                <i data-lucide="log-out" class="w-5 h-5 mr-3"></i>
+                Logout
+            </a>
+        </div>
+        </div>
+
+    <!-- Top Header -->
+    <header class="navbar-fixed bg-white shadow-lg border-b border-gray-200">
+        <div class="px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex items-center justify-end">
+                <!-- Right side - Notifications and Profile -->
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button class="p-2 text-gray-400 hover:text-gray-600">
+                        <i data-lucide="bell" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+                    </button>
+                    <div class="w-6 h-6 sm:w-8 sm:h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs sm:text-sm font-medium">P</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content-with-fixed bg-gray-50">
+        {% block content %}
+        <div class="p-4 sm:p-6">
+            <!-- Dashboard Content -->
+            <div class="space-y-4 sm:space-y-6">
+                <!-- Content will be added here -->
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileCloseButton = document.getElementById('mobile-close-button');
+        const sidebar = document.getElementById('sidebar');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        
+        function toggleSidebar() {
+            sidebar.classList.toggle('open');
+            mobileOverlay.classList.toggle('hidden');
+        }
+        
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            mobileOverlay.classList.add('hidden');
+        }
+        
+        // Event listeners
+        mobileMenuButton.addEventListener('click', toggleSidebar);
+        mobileCloseButton.addEventListener('click', closeSidebar);
+        mobileOverlay.addEventListener('click', closeSidebar);
+        
+        // Close sidebar when clicking on a menu item (mobile)
+        const menuItems = document.querySelectorAll('#sidebar a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    closeSidebar();
+                }
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                closeSidebar();
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

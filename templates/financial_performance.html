@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Financial Performance & Position - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Financial Performance & Position</h1>
+        <p class="text-gray-600">Insurance Contract Liabilities and IFRS 17 Analysis</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Insurance Contract Liabilities Section -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="file-text" class="w-5 h-5 text-blue-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Insurance Contract Liabilities</h2>
+            </div>
+            
+            <!-- GMM, PAA, VFA Tabs -->
+            <div class="mb-4">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8">
+                        <button class="py-2 px-1 border-b-2 border-blue-500 text-blue-600 font-medium text-sm">
+                            GMM
+                        </button>
+                        <button class="py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm">
+                            PAA
+                        </button>
+                        <button class="py-2 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm">
+                            VFA
+                        </button>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- GMM Content -->
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-3 rounded-md">
+                        <div class="text-sm text-gray-600">Contractual Service Margin</div>
+                        <div class="text-lg font-semibold text-gray-900">€2,450,000</div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md">
+                        <div class="text-sm text-gray-600">Risk Adjustment</div>
+                        <div class="text-lg font-semibold text-gray-900">€1,230,000</div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-md">
+                    <h4 class="font-medium text-blue-900 mb-2">General Measurement Model (GMM)</h4>
+                    <p class="text-sm text-blue-800">Full IFRS 17 measurement approach with comprehensive risk assessment and future cash flow projections.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contractual Service Margin Roll-forward -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="trending-up" class="w-5 h-5 text-green-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">CSM Roll-forward</h2>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm text-gray-600">Opening Balance</span>
+                    <span class="font-medium">€2,100,000</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm text-gray-600">New Contracts</span>
+                    <span class="font-medium text-green-600">+€450,000</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm text-gray-600">Interest Accretion</span>
+                    <span class="font-medium text-green-600">+€125,000</span>
+                </div>
+                <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                    <span class="text-sm text-gray-600">Experience Adjustments</span>
+                    <span class="font-medium text-red-600">-€75,000</span>
+                </div>
+                <div class="flex justify-between items-center py-2 bg-gray-50 px-3 py-2 rounded-md">
+                    <span class="text-sm font-medium text-gray-900">Closing Balance</span>
+                    <span class="font-bold text-lg">€2,600,000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loss Component Tracker -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Loss Component Tracker</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h4 class="font-medium text-red-900">Onerous Contracts</h4>
+                            <p class="text-sm text-red-700">Contracts with negative CSM</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-red-600">€-180,000</div>
+                            <div class="text-sm text-red-500">15 contracts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Total Loss Component</span>
+                        <span class="font-medium">€-180,000</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Recognition Period</span>
+                        <span class="font-medium">Immediate</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-600">Impact on P&L</span>
+                        <span class="font-medium text-red-600">€-180,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equity Impact Analysis -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-purple-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Equity Impact Analysis</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-3 rounded-md text-center">
+                        <div class="text-sm text-gray-600 mb-1">IFRS 4</div>
+                        <div class="text-lg font-semibold text-gray-900">€5,200,000</div>
+                        <div class="text-xs text-gray-500">Retained Earnings</div>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-md text-center">
+                        <div class="text-sm text-gray-600 mb-1">IFRS 17</div>
+                        <div class="text-lg font-semibold text-gray-900">€4,850,000</div>
+                        <div class="text-xs text-gray-500">Retained Earnings</div>
+                    </div>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-purple-900">Transition Impact</span>
+                        <span class="text-lg font-bold text-purple-600">€-350,000</span>
+                    </div>
+                    <div class="text-xs text-purple-700 mt-1">
+                        Decrease in equity due to IFRS 17 adoption
+                    </div>
+                </div>
+                
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">CSM Recognition</span>
+                        <span class="text-green-600">+€2,600,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Loss Component</span>
+                        <span class="text-red-600">-€180,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Risk Adjustment</span>
+                        <span class="text-blue-600">+€1,230,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards Row -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="file-text" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Total Liabilities</p>
+                    <p class="text-lg font-semibold text-gray-900">€8,450,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">CSM Balance</p>
+                    <p class="text-lg font-semibold text-gray-900">€2,600,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-red-100 rounded-md">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-red-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Onerous Contracts</p>
+                    <p class="text-lg font-semibold text-gray-900">15</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-md">
+                    <i data-lucide="bar-chart-2" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Equity Impact</p>
+                    <p class="text-lg font-semibold text-gray-900">€-350,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

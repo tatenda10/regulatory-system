@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Compliance & Supervisory Alerts - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Compliance & Supervisory Alerts</h1>
+        <p class="text-gray-600">Regulatory Compliance Monitoring and Alert Management</p>
+    </div>
+
+    <!-- Alert Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-red-100 rounded-md">
+                    <i data-lucide="alert-circle" class="w-5 h-5 text-red-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-600">Critical Alerts</p>
+                    <p class="text-2xl font-bold text-red-700">3</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-yellow-100 rounded-md">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-600">Warning Alerts</p>
+                    <p class="text-2xl font-bold text-yellow-700">7</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-blue-600">Info Alerts</p>
+                    <p class="text-2xl font-bold text-blue-700">12</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-green-600">Resolved</p>
+                    <p class="text-2xl font-bold text-green-700">45</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Late/Non-Submission Tracking -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="clock" class="w-5 h-5 text-red-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Late/Non-Submission Tracking</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Overdue Submissions -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Overdue Submissions</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">Q3 2024 Solvency II Report</div>
+                                <div class="text-xs text-red-700">Due: 15 Nov 2024 • Overdue: 8 days</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">Monthly Risk Dashboard</div>
+                                <div class="text-xs text-red-700">Due: 5 Dec 2024 • Overdue: 2 days</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">IFRS 17 Quarterly Update</div>
+                                <div class="text-xs text-red-700">Due: 10 Dec 2024 • Overdue: 1 day</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Warning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Deadlines -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-3">Upcoming Deadlines</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Annual Report 2024</span>
+                            <span class="font-medium text-blue-900">15 Jan 2025</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Q4 Solvency II Report</span>
+                            <span class="font-medium text-blue-900">31 Jan 2025</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Stress Test Results</span>
+                            <span class="font-medium text-blue-900">28 Feb 2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submission Statistics -->
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Submission Statistics</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-green-600">92%</div>
+                            <div class="text-gray-600">On-Time Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-bold text-red-600">3</div>
+                            <div class="text-gray-600">Overdue Items</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deviation from Tolerance Levels -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="target" class="w-5 h-5 text-orange-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Deviation from Tolerance Levels</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- CSM Coverage Units -->
+                <div class="bg-orange-50 border border-orange-200 rounded-md p-4">
+                    <h4 class="font-medium text-orange-900 mb-3">CSM Coverage Units</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-orange-900">Life Insurance CSM</div>
+                                <div class="text-xs text-orange-700">Current: 0.85 • Target: 1.00 • Deviation: -15%</div>
+                            </div>
+                            <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Warning</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-orange-900">Health Insurance CSM</div>
+                                <div class="text-xs text-orange-700">Current: 1.25 • Target: 1.00 • Deviation: +25%</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-orange-900">Annuity CSM</div>
+                                <div class="text-xs text-orange-700">Current: 0.95 • Target: 1.00 • Deviation: -5%</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Warning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solvency Ratio Deviations -->
+                <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+                    <h4 class="font-medium text-yellow-900 mb-3">Solvency Ratio Deviations</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-yellow-700">Current Ratio</span>
+                            <span class="font-medium text-yellow-900">147%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-yellow-700">Target Range</span>
+                            <span class="font-medium text-yellow-900">130% - 180%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-yellow-700">Status</span>
+                            <span class="font-medium text-green-600">Within Range</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Adjustment Tolerance -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-3">Risk Adjustment Tolerance</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Current Level</span>
+                            <span class="font-medium text-blue-900">€1,300,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Tolerance Band</span>
+                            <span class="font-medium text-blue-900">±€200,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Deviation</span>
+                            <span class="font-medium text-green-600">Within Tolerance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sudden Profitability/Liquidity Shifts -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="trending-up" class="w-5 h-5 text-purple-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Sudden Profitability/Liquidity Shifts</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Profitability Alerts -->
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
+                    <h4 class="font-medium text-purple-900 mb-3">Profitability Shifts</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Q3 vs Q2 Profit Drop</div>
+                                <div class="text-xs text-purple-700">-35% decrease in insurance service result</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Claims Ratio Spike</div>
+                                <div class="text-xs text-purple-700">Claims ratio increased from 65% to 78%</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Warning</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-purple-900">Investment Income Drop</div>
+                                <div class="text-xs text-purple-700">-12% decrease in investment returns</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Warning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Liquidity Alerts -->
+                <div class="bg-indigo-50 border border-indigo-200 rounded-md p-4">
+                    <h4 class="font-medium text-indigo-900 mb-3">Liquidity Shifts</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-indigo-700">Liquidity Ratio</span>
+                            <span class="font-medium text-indigo-900">129% → 115%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-indigo-700">Cash Position</span>
+                            <span class="font-medium text-indigo-900">€4.4M → €3.8M</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-indigo-700">Status</span>
+                            <span class="font-medium text-yellow-600">Monitoring</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trend Analysis -->
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Trend Analysis (Last 6 Months)</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Profitability Trend</span>
+                            <span class="font-medium text-red-600">Declining</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Liquidity Trend</span>
+                            <span class="font-medium text-yellow-600">Stable</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Risk Level</span>
+                            <span class="font-medium text-orange-600">Increasing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Persistent Onerous Groups -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="alert-octagon" class="w-5 h-5 text-red-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Persistent Onerous Groups</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Onerous Contract Groups -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Onerous Contract Groups</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">Group A - Life Insurance</div>
+                                <div class="text-xs text-red-700">15 contracts • -€180,000 CSM • 6 months persistent</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">Group B - Health Insurance</div>
+                                <div class="text-xs text-red-700">8 contracts • -€95,000 CSM • 4 months persistent</div>
+                            </div>
+                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Critical</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-sm font-medium text-red-900">Group C - Annuities</div>
+                                <div class="text-xs text-red-700">3 contracts • -€45,000 CSM • 2 months persistent</div>
+                            </div>
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Warning</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remediation Actions -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-3">Remediation Actions</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Premium Increases</span>
+                            <span class="font-medium text-blue-900">Implemented</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Benefit Reductions</span>
+                            <span class="font-medium text-blue-900">Under Review</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-blue-700">Contract Terminations</span>
+                            <span class="font-medium text-blue-900">Planned</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Impact Assessment -->
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">Impact Assessment</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Total Onerous CSM</span>
+                            <span class="font-medium text-red-600">-€320,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">P&L Impact</span>
+                            <span class="font-medium text-red-600">-€320,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Recovery Timeline</span>
+                            <span class="font-medium text-gray-900">12-18 months</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Items Section -->
+    <div class="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center mb-4">
+            <i data-lucide="clipboard-list" class="w-5 h-5 text-gray-600 mr-2"></i>
+            <h2 class="text-lg font-semibold text-gray-900">Immediate Action Items</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-md">
+                    <div class="flex items-center">
+                        <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 mr-2"></i>
+                        <span class="text-sm font-medium text-red-900">Submit Q3 Solvency II Report</span>
+                    </div>
+                    <span class="text-xs text-red-600">Due Now</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                    <div class="flex items-center">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-yellow-600 mr-2"></i>
+                        <span class="text-sm font-medium text-yellow-900">Review Health Insurance CSM</span>
+                    </div>
+                    <span class="text-xs text-yellow-600">3 days</span>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+                    <div class="flex items-center">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 text-yellow-600 mr-2"></i>
+                        <span class="text-sm font-medium text-yellow-900">Address Profitability Drop</span>
+                    </div>
+                    <span class="text-xs text-yellow-600">1 week</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-blue-50 border border-blue-200 rounded-md">
+                    <div class="flex items-center">
+                        <i data-lucide="info" class="w-4 h-4 text-blue-600 mr-2"></i>
+                        <span class="text-sm font-medium text-blue-900">Update Onerous Group Plans</span>
+                    </div>
+                    <span class="text-xs text-blue-600">2 weeks</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

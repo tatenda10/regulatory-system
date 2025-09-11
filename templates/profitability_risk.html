@@ -1,0 +1,336 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Profitability & Risk - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Profitability & Risk</h1>
+        <p class="text-gray-600">Insurance Service Results and Risk Analysis</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Insurance Service Result Breakdown -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="pie-chart" class="w-5 h-5 text-blue-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Insurance Service Result Breakdown</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Revenue Components -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                    <h4 class="font-medium text-green-900 mb-3">Revenue Components</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Insurance Revenue</span>
+                            <span class="font-medium text-green-900">€8,450,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Investment Income</span>
+                            <span class="font-medium text-green-900">€1,230,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">Other Income</span>
+                            <span class="font-medium text-green-900">€180,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-medium border-t border-green-200 pt-2">
+                            <span class="text-green-900">Total Revenue</span>
+                            <span class="text-green-900">€9,860,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expense Components -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Expense Components</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">Claims & Benefits</span>
+                            <span class="font-medium text-red-900">€6,200,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">Acquisition Costs</span>
+                            <span class="font-medium text-red-900">€450,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">Administrative Expenses</span>
+                            <span class="font-medium text-red-900">€320,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">Risk Adjustment Release</span>
+                            <span class="font-medium text-red-900">€-150,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-medium border-t border-red-200 pt-2">
+                            <span class="text-red-900">Total Expenses</span>
+                            <span class="text-red-900">€6,820,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Net Result -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium text-blue-900">Insurance Service Result</span>
+                        <span class="text-2xl font-bold text-blue-600">€3,040,000</span>
+                    </div>
+                    <div class="text-sm text-blue-700 mt-1">Net Profit Margin: 30.8%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Adjustment Trends -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="trending-up" class="w-5 h-5 text-orange-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Risk Adjustment Trends</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Risk Adjustment by Quarter -->
+                <div class="space-y-3">
+                    <h4 class="font-medium text-gray-900">Quarterly Risk Adjustment (€000s)</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Q1 2024</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€1,250</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Q2 2024</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€1,150</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Q3 2024</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€1,350</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Q4 2024</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 88%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€1,300</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Risk Adjustment by Product -->
+                <div class="bg-orange-50 border border-orange-200 rounded-md p-4">
+                    <h4 class="font-medium text-orange-900 mb-3">Risk Adjustment by Product Line</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-orange-700">Life Insurance</span>
+                            <span class="font-medium text-orange-900">€850,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-orange-700">Health Insurance</span>
+                            <span class="font-medium text-orange-900">€320,000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-orange-700">Annuities</span>
+                            <span class="font-medium text-orange-900">€130,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discounting & Sensitivity Analysis -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 lg:col-span-2">
+            <div class="flex items-center mb-4">
+                <i data-lucide="calculator" class="w-5 h-5 text-purple-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Discounting & Sensitivity Analysis</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Mortality Sensitivity -->
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
+                    <h4 class="font-medium text-purple-900 mb-3">Mortality Sensitivity</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-600">€2,450,000</div>
+                            <div class="text-sm text-purple-700">Base Case Liability</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-purple-700">+10% Mortality</span>
+                                <span class="font-medium text-red-600">+€245,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-purple-700">-10% Mortality</span>
+                                <span class="font-medium text-green-600">-€220,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-purple-700">+20% Mortality</span>
+                                <span class="font-medium text-red-600">+€490,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lapse Sensitivity -->
+                <div class="bg-indigo-50 border border-indigo-200 rounded-md p-4">
+                    <h4 class="font-medium text-indigo-900 mb-3">Lapse Sensitivity</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-indigo-600">€1,890,000</div>
+                            <div class="text-sm text-indigo-700">Base Case Liability</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-indigo-700">+5% Lapse Rate</span>
+                                <span class="font-medium text-green-600">-€95,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-indigo-700">-5% Lapse Rate</span>
+                                <span class="font-medium text-red-600">+€85,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-indigo-700">+10% Lapse Rate</span>
+                                <span class="font-medium text-green-600">-€190,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Discount Rate Sensitivity -->
+                <div class="bg-teal-50 border border-teal-200 rounded-md p-4">
+                    <h4 class="font-medium text-teal-900 mb-3">Discount Rate Sensitivity</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-teal-600">€4,340,000</div>
+                            <div class="text-sm text-teal-700">Base Case Liability</div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-teal-700">+50bps Rate</span>
+                                <span class="font-medium text-green-600">-€180,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-teal-700">-50bps Rate</span>
+                                <span class="font-medium text-red-600">+€195,000</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-teal-700">+100bps Rate</span>
+                                <span class="font-medium text-green-600">-€360,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Combined Sensitivity Matrix -->
+            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">Combined Sensitivity Matrix</h4>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-200">
+                                <th class="text-left py-2 text-gray-600">Scenario</th>
+                                <th class="text-right py-2 text-gray-600">Mortality</th>
+                                <th class="text-right py-2 text-gray-600">Lapse</th>
+                                <th class="text-right py-2 text-gray-600">Discount Rate</th>
+                                <th class="text-right py-2 text-gray-600">Net Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody class="space-y-1">
+                            <tr class="border-b border-gray-100">
+                                <td class="py-2 text-gray-700">Worst Case</td>
+                                <td class="text-right py-2 text-red-600">+20%</td>
+                                <td class="text-right py-2 text-red-600">-10%</td>
+                                <td class="text-right py-2 text-red-600">-100bps</td>
+                                <td class="text-right py-2 font-medium text-red-600">+€885,000</td>
+                            </tr>
+                            <tr class="border-b border-gray-100">
+                                <td class="py-2 text-gray-700">Base Case</td>
+                                <td class="text-right py-2 text-gray-600">0%</td>
+                                <td class="text-right py-2 text-gray-600">0%</td>
+                                <td class="text-right py-2 text-gray-600">0bps</td>
+                                <td class="text-right py-2 font-medium text-gray-600">€0</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-gray-700">Best Case</td>
+                                <td class="text-right py-2 text-green-600">-20%</td>
+                                <td class="text-right py-2 text-green-600">+10%</td>
+                                <td class="text-right py-2 text-green-600">+100bps</td>
+                                <td class="text-right py-2 font-medium text-green-600">-€775,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards Row -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Insurance Service Result</p>
+                    <p class="text-lg font-semibold text-gray-900">€3,040,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-orange-100 rounded-md">
+                    <i data-lucide="shield" class="w-4 h-4 text-orange-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Risk Adjustment</p>
+                    <p class="text-lg font-semibold text-gray-900">€1,300,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-md">
+                    <i data-lucide="calculator" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Sensitivity Range</p>
+                    <p class="text-lg font-semibold text-gray-900">±€885,000</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="percent" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Profit Margin</p>
+                    <p class="text-lg font-semibold text-gray-900">30.8%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

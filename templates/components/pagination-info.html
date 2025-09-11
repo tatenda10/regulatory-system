@@ -1,0 +1,22 @@
+{% comment %}
+Simple Pagination Info Component
+
+Usage:
+{% include "components/pagination-info.html" with page_obj=page_obj paginator=paginator %}
+
+Parameters:
+- page_obj: Django page object
+- paginator: Django paginator object
+{% endcomment %}
+
+{% if paginator.count > 0 %}
+<div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+    <div class="flex justify-center sm:justify-start">
+        <p class="text-sm text-gray-700">
+            Showing <span class="font-medium">{{ page_obj.start_index }}</span> 
+            to <span class="font-medium">{{ page_obj.end_index }}</span> 
+            of <span class="font-medium">{{ paginator.count }}</span> results
+        </p>
+    </div>
+</div>
+{% endif %} 

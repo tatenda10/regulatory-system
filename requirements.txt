@@ -1,0 +1,5 @@
+Django>=4.2.0,<5.0
+python-decouple>=3.8
+Pillow>=10.0.0
+django-tailwind>=3.4.0
+django-browser-reload>=1.9.0

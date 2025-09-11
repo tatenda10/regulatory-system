@@ -1,0 +1,376 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Liquidity & Solvency - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Liquidity & Solvency</h1>
+        <p class="text-gray-600">Solvency II Ratios and Cashflow Analysis</p>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Solvency II / RBC Ratios -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="shield-check" class="w-5 h-5 text-green-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Solvency II / RBC Ratios</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Solvency Capital Requirement -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                    <h4 class="font-medium text-green-900 mb-3">Solvency Capital Requirement (SCR)</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-600">€2,850,000</div>
+                            <div class="text-sm text-green-700">Total SCR</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-600">€4,200,000</div>
+                            <div class="text-sm text-green-700">Available Capital</div>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <div class="text-3xl font-bold text-green-600">147%</div>
+                        <div class="text-sm text-green-700">Solvency Ratio</div>
+                    </div>
+                </div>
+
+                <!-- Risk Modules Breakdown -->
+                <div class="space-y-3">
+                    <h4 class="font-medium text-gray-900">SCR Risk Modules (€000s)</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Market Risk</span>
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-red-500 h-2 rounded-full" style="width: 35%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€1,000</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Underwriting Risk</span>
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-orange-500 h-2 rounded-full" style="width: 28%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€800</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Credit Risk</span>
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 18%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€500</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Operational Risk</span>
+                            <div class="flex items-center">
+                                <div class="w-24 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 19%"></div>
+                                </div>
+                                <span class="text-sm font-medium">€550</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regulatory Thresholds -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-2">Regulatory Thresholds</h4>
+                    <div class="space-y-1 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-blue-700">Minimum Required</span>
+                            <span class="font-medium text-blue-900">100%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-blue-700">Current Position</span>
+                            <span class="font-medium text-green-600">147%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-blue-700">Regulatory Buffer</span>
+                            <span class="font-medium text-green-600">+47%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cashflow Maturity Ladders -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div class="flex items-center mb-4">
+                <i data-lucide="calendar" class="w-5 h-5 text-blue-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Cashflow Maturity Ladders</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Cash Inflows -->
+                <div class="bg-green-50 border border-green-200 rounded-md p-4">
+                    <h4 class="font-medium text-green-900 mb-3">Cash Inflows (€000s)</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">0-1 Year</span>
+                            <span class="font-medium text-green-900">€2,450</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">1-3 Years</span>
+                            <span class="font-medium text-green-900">€3,200</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">3-5 Years</span>
+                            <span class="font-medium text-green-900">€2,800</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">5-10 Years</span>
+                            <span class="font-medium text-green-900">€4,100</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-green-700">10+ Years</span>
+                            <span class="font-medium text-green-900">€6,850</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-medium border-t border-green-200 pt-2">
+                            <span class="text-green-900">Total Inflows</span>
+                            <span class="text-green-900">€19,400</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cash Outflows -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Cash Outflows (€000s)</h4>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">0-1 Year</span>
+                            <span class="font-medium text-red-900">€1,850</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">1-3 Years</span>
+                            <span class="font-medium text-red-900">€2,400</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">3-5 Years</span>
+                            <span class="font-medium text-red-900">€2,100</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">5-10 Years</span>
+                            <span class="font-medium text-red-900">€3,200</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-red-700">10+ Years</span>
+                            <span class="font-medium text-red-900">€5,450</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-medium border-t border-red-200 pt-2">
+                            <span class="text-red-900">Total Outflows</span>
+                            <span class="text-red-900">€15,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Net Cashflow -->
+                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
+                    <h4 class="font-medium text-blue-900 mb-2">Net Cashflow Position</h4>
+                    <div class="space-y-1 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-blue-700">Net Inflow</span>
+                            <span class="font-medium text-green-600">€4,400,000</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-blue-700">Liquidity Coverage Ratio</span>
+                            <span class="font-medium text-green-600">129%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stress Test Results -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 lg:col-span-2">
+            <div class="flex items-center mb-4">
+                <i data-lucide="activity" class="w-5 h-5 text-purple-600 mr-2"></i>
+                <h2 class="text-lg font-semibold text-gray-900">Stress Test Results</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Market Stress -->
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <h4 class="font-medium text-red-900 mb-3">Market Stress Scenario</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-red-600">89%</div>
+                            <div class="text-sm text-red-700">Solvency Ratio</div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-red-700">Equity Drop</span>
+                                <span class="font-medium text-red-900">-30%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-red-700">Interest Rate</span>
+                                <span class="font-medium text-red-900">+200bps</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-red-700">Credit Spread</span>
+                                <span class="font-medium text-red-900">+150bps</span>
+                            </div>
+                        </div>
+                        <div class="bg-red-100 rounded-md p-2 text-center">
+                            <div class="text-xs text-red-800">Below 100% Threshold</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Underwriting Stress -->
+                <div class="bg-orange-50 border border-orange-200 rounded-md p-4">
+                    <h4 class="font-medium text-orange-900 mb-3">Underwriting Stress</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-orange-600">112%</div>
+                            <div class="text-sm text-orange-700">Solvency Ratio</div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-orange-700">Mortality Increase</span>
+                                <span class="font-medium text-orange-900">+25%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-orange-700">Lapse Rate</span>
+                                <span class="font-medium text-orange-900">-20%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-orange-700">Expense Increase</span>
+                                <span class="font-medium text-orange-900">+15%</span>
+                            </div>
+                        </div>
+                        <div class="bg-orange-100 rounded-md p-2 text-center">
+                            <div class="text-xs text-orange-800">Above 100% Threshold</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combined Stress -->
+                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
+                    <h4 class="font-medium text-purple-900 mb-3">Combined Stress</h4>
+                    <div class="space-y-3">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-purple-600">76%</div>
+                            <div class="text-sm text-purple-700">Solvency Ratio</div>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span class="text-purple-700">Market + UW</span>
+                                <span class="font-medium text-purple-900">Combined</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-700">Operational Risk</span>
+                                <span class="font-medium text-purple-900">+50%</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-purple-700">Credit Risk</span>
+                                <span class="font-medium text-purple-900">+100%</span>
+                            </div>
+                        </div>
+                        <div class="bg-red-100 rounded-md p-2 text-center">
+                            <div class="text-xs text-red-800">Critical Level</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress Test Summary -->
+            <div class="mt-6 bg-gray-50 border border-gray-200 rounded-md p-4">
+                <h4 class="font-medium text-gray-900 mb-3">Stress Test Summary</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Base Case Solvency Ratio</span>
+                            <span class="font-medium text-green-600">147%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Market Stress Impact</span>
+                            <span class="font-medium text-red-600">-58%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Underwriting Stress Impact</span>
+                            <span class="font-medium text-orange-600">-35%</span>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Combined Stress Impact</span>
+                            <span class="font-medium text-red-600">-71%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Regulatory Buffer</span>
+                            <span class="font-medium text-green-600">+47%</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Risk Tolerance</span>
+                            <span class="font-medium text-yellow-600">Medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards Row -->
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Solvency Ratio</p>
+                    <p class="text-lg font-semibold text-gray-900">147%</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="droplets" class="w-4 h-4 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Liquidity Ratio</p>
+                    <p class="text-lg font-semibold text-gray-900">129%</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-md">
+                    <i data-lucide="activity" class="w-4 h-4 text-purple-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Stress Test Min</p>
+                    <p class="text-lg font-semibold text-gray-900">76%</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-yellow-100 rounded-md">
+                    <i data-lucide="trending-up" class="w-4 h-4 text-yellow-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Net Cashflow</p>
+                    <p class="text-lg font-semibold text-gray-900">€4.4M</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
