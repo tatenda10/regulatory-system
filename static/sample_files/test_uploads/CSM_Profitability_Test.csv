@@ -1,0 +1,5 @@
+Contract_Group,Opening_CSM,New_Contracts_CSM,Interest_Accretion,Experience_Adjustments,CSM_Release,Closing_CSM,CSM_Profit_Margin,CSM_ROI,Expected_Profit,Actual_Profit,Profit_Variance,Profitable_Contracts,Loss_Making_Contracts,Break_Even_Contracts,Currency
+Life Insurance Group A,2100000,450000,125000,-75000,180000,2600000,15.2,12.8,1850000,1920000,70000,850,45,25,ZWL
+Health Insurance Group B,1800000,320000,95000,-45000,150000,2125000,12.8,10.5,1520000,1480000,-40000,620,38,42,ZWL
+Annuity Group C,1200000,280000,75000,-25000,120000,1500000,18.5,15.2,980000,1020000,40000,420,15,35,ZWL
+Variable Annuity Group,800000,200000,60000,-20000,100000,1020000,22.1,18.7,650000,680000,30000,280,8,12,ZWL

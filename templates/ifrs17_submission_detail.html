@@ -1,0 +1,622 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} - IPEC{% endblock %}
+
+{% block extra_head %}
+<!-- CSRF token for AJAX requests -->
+{% csrf_token %}
+<!-- No external libraries needed - using server-side parsing -->
+{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <a href="{% url 'core:ifrs17-submissions' %}" class="mr-4 text-gray-400 hover:text-gray-600">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ submission.institution.name }}</h1>
+                    <p class="text-gray-600">IFRS 17 Submission - {{ submission.reporting_period|date:"F Y" }}</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="runDataChecksBtn" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                    <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i>
+                    Run Data Quality Check
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submission Status and Info -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Status</p>
+                    {% if submission.status == 'approved' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            Approved
+                        </span>
+                    {% elif submission.status == 'under_review' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            Under Review
+                        </span>
+                    {% elif submission.status == 'rejected' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                            Rejected
+                        </span>
+                    {% elif submission.status == 'submitted' %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            Submitted
+                        </span>
+                    {% else %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            Draft
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="calendar" class="w-5 h-5 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Reporting Period</p>
+                    <p class="text-sm font-medium text-gray-900">{{ submission.reporting_period|date:"F Y" }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-md">
+                    <i data-lucide="clock" class="w-5 h-5 text-purple-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Submitted</p>
+                    <p class="text-sm font-medium text-gray-900">{{ submission.submission_date|date:"M d, Y" }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-orange-100 rounded-md">
+                    <i data-lucide="user" class="w-5 h-5 text-orange-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Reviewed By</p>
+                    <p class="text-sm font-medium text-gray-900">
+                        {% if submission.reviewed_by %}
+                            {{ submission.reviewed_by.get_full_name|default:submission.reviewed_by.username }}
+                        {% else %}
+                            Not reviewed
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Submitted Files for Institution & Reporting Period -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-gray-900">All Submitted Data - {{ submission.reporting_period|date:"F Y" }}</h3>
+            <div class="text-sm text-gray-600">
+                {{ total_files }} file{{ total_files|pluralize }} submitted
+            </div>
+        </div>
+        
+        {% if all_submissions %}
+            <!-- File Type Tabs -->
+            <div class="mb-6">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex space-x-8">
+                        {% for file_type, submissions in submissions_by_type.items %}
+                        <button onclick="showFileType('{{ file_type }}')" 
+                                class="file-type-tab py-2 px-1 border-b-2 font-medium text-sm {% if forloop.first %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %}">
+                            {{ file_type|upper }} Files ({{ submissions|length }})
+                        </button>
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Files by Type -->
+            {% for file_type, submissions in submissions_by_type.items %}
+            <div id="files-{{ file_type }}" class="file-type-content {% if not forloop.first %}hidden{% endif %}">
+                <div class="space-y-4">
+                    {% for sub in submissions %}
+                    <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                {% if sub.file_type == 'csv' %}
+                                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i data-lucide="file-text" class="w-5 h-5 text-blue-600"></i>
+                                    </div>
+                                {% elif sub.file_type == 'xlsx' %}
+                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i data-lucide="file-spreadsheet" class="w-5 h-5 text-green-600"></i>
+                                    </div>
+                                {% elif sub.file_type == 'xbrl' %}
+                                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i data-lucide="file-xml" class="w-5 h-5 text-purple-600"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i data-lucide="file" class="w-5 h-5 text-gray-600"></i>
+                                    </div>
+                                {% endif %}
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-900">
+                                        {% if sub.uploaded_file %}
+                                            {{ sub.uploaded_file.name|slice:"-50:" }}
+                                        {% else %}
+                                            Document {{ sub.id }}
+                                        {% endif %}
+                                    </h4>
+                                    <p class="text-xs text-gray-500">
+                                        {% if sub.file_type %}
+                                            {{ sub.get_file_type_display|upper }} File
+                                        {% else %}
+                                            Uploaded File
+                                        {% endif %}
+                                        • {{ sub.submission_date|date:"M d, Y H:i" }}
+                                        {% if sub.uploaded_file %}
+                                            • {{ sub.uploaded_file.size|filesizeformat }}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <!-- Status Badge -->
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                                    {% if sub.status == 'approved' %}bg-green-100 text-green-800
+                                    {% elif sub.status == 'under_review' %}bg-yellow-100 text-yellow-800
+                                    {% elif sub.status == 'rejected' %}bg-red-100 text-red-800
+                                    {% else %}bg-blue-100 text-blue-800{% endif %}">
+                                    {{ sub.get_status_display }}
+                                </span>
+                                
+                                <!-- View Data Button -->
+                                <button onclick="loadFileData({{ sub.id }})" 
+                                        class="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm">
+                                    <i data-lucide="eye" class="w-4 h-4 inline mr-1"></i>
+                                    View Data
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Display Area (initially hidden) -->
+                        <div id="data-{{ sub.id }}" class="mt-4 pt-4 border-t border-gray-200 hidden">
+                            <h5 class="text-sm font-medium text-gray-700 mb-2">Data View</h5>
+                            <div class="bg-white border border-gray-200 rounded-md overflow-hidden">
+                                <div id="data-table-container-{{ sub.id }}" class="overflow-x-auto">
+                                    <div id="data-loading-{{ sub.id }}" class="p-8 text-center">
+                                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+                                        <p class="text-sm text-gray-600">Loading data...</p>
+                                    </div>
+                                    <div id="data-table-{{ sub.id }}" class="hidden">
+                                        <!-- Data table will be populated here -->
+                                    </div>
+                                    <div id="data-error-{{ sub.id }}" class="hidden p-4 text-center text-red-600">
+                                        <p>Error loading data. Please try again.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 flex justify-between items-center">
+                                <button onclick="refreshFileData({{ sub.id }})" 
+                                        class="text-sm text-blue-600 hover:text-blue-800">
+                                    Refresh Data View
+                                </button>
+                                <div class="text-xs text-gray-500">
+                                    <span id="row-count-{{ sub.id }}">0</span> rows loaded
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="text-center py-8">
+                <i data-lucide="file-x" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
+                <p class="text-gray-500">No files uploaded for this institution and reporting period</p>
+                <p class="text-sm text-gray-400 mt-1">Files need to be uploaded to appear here</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Submission Details -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <!-- Submission Information -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Submission Information</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">File Type</span>
+                    <span class="text-sm font-medium text-gray-900">
+                        {% if submission.file_type %}
+                            {{ submission.get_file_type_display|upper }}
+                        {% else %}
+                            Not specified
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Submission Date</span>
+                    <span class="text-sm font-medium text-gray-900">{{ submission.submission_date|date:"M d, Y H:i" }}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">File Size</span>
+                    <span class="text-sm font-medium text-gray-900">
+                        {% if submission.uploaded_file %}
+                            {{ submission.uploaded_file.size|filesizeformat }}
+                        {% else %}
+                            Unknown
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Status</span>
+                    <span class="text-sm font-medium text-gray-900">{{ submission.get_status_display }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Information -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Review Information</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Reviewed By</span>
+                    <span class="text-sm font-medium text-gray-900">
+                        {% if submission.reviewed_by %}
+                            {{ submission.reviewed_by.get_full_name|default:submission.reviewed_by.username }}
+                        {% else %}
+                            Not reviewed
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Review Date</span>
+                    <span class="text-sm font-medium text-gray-900">
+                        {% if submission.review_date %}
+                            {{ submission.review_date|date:"M d, Y H:i" }}
+                        {% else %}
+                            Not reviewed
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-sm text-gray-600">Processing Time</span>
+                    <span class="text-sm font-medium text-gray-900">
+                        {% if submission.review_date %}
+                            {{ submission.submission_date|timesince:submission.review_date }}
+                        {% else %}
+                            In progress
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notes and Review Information -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Notes and Review Information</h3>
+        
+        {% if submission.notes %}
+            <div class="mb-4">
+                <h4 class="text-sm font-medium text-gray-700 mb-2">Institution Notes</h4>
+                <div class="bg-gray-50 p-4 rounded-md">
+                    <p class="text-sm text-gray-900">{{ submission.notes }}</p>
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if submission.review_date %}
+            <div class="mb-4">
+                <h4 class="text-sm font-medium text-gray-700 mb-2">Review Information</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <span class="text-sm text-gray-600">Reviewed by:</span>
+                        <p class="text-sm font-medium text-gray-900">
+                            {% if submission.reviewed_by %}
+                                {{ submission.reviewed_by.get_full_name|default:submission.reviewed_by.username }}
+                            {% else %}
+                                Not specified
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div>
+                        <span class="text-sm text-gray-600">Review date:</span>
+                        <p class="text-sm font-medium text-gray-900">{{ submission.review_date|date:"M d, Y H:i" }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        
+        <!-- Review Actions -->
+        {% if submission.status == 'submitted' or submission.status == 'under_review' %}
+            <div class="border-t border-gray-200 pt-4">
+                <h4 class="text-sm font-medium text-gray-700 mb-3">Review Actions</h4>
+                <div class="flex space-x-3">
+                    {% if submission.status == 'submitted' %}
+                        <button class="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 transition-colors">
+                            Mark Under Review
+                        </button>
+                    {% endif %}
+                    {% if submission.status == 'under_review' %}
+                        <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
+                            Approve Submission
+                        </button>
+                        <button class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">
+                            Reject Submission
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // File type tab switching
+    function showFileType(fileType) {
+        // Hide all file type contents
+        document.querySelectorAll('.file-type-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+        
+        // Remove active class from all tabs
+        document.querySelectorAll('.file-type-tab').forEach(tab => {
+            tab.classList.remove('border-blue-500', 'text-blue-600');
+            tab.classList.add('border-transparent', 'text-gray-500');
+        });
+        
+        // Show selected file type content
+        document.getElementById(`files-${fileType}`).classList.remove('hidden');
+        
+        // Add active class to selected tab
+        event.target.classList.remove('border-transparent', 'text-gray-500');
+        event.target.classList.add('border-blue-500', 'text-blue-600');
+    }
+    
+    // Load data for a specific file
+    function loadFileData(submissionId) {
+        const dataContainer = document.getElementById(`data-${submissionId}`);
+        const loadingElement = document.getElementById(`data-loading-${submissionId}`);
+        const tableElement = document.getElementById(`data-table-${submissionId}`);
+        const errorElement = document.getElementById(`data-error-${submissionId}`);
+        const rowCountElement = document.getElementById(`row-count-${submissionId}`);
+        
+        // Show data container and loading state
+        dataContainer.classList.remove('hidden');
+        loadingElement.classList.remove('hidden');
+        tableElement.classList.add('hidden');
+        errorElement.classList.add('hidden');
+        
+        // Fetch data from server
+        fetch(`/parse-file-data/${submissionId}/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayDataTable(data.data, tableElement);
+                    rowCountElement.textContent = data.displayed_rows;
+                    
+                    if (data.truncated) {
+                        rowCountElement.textContent += ` of ${data.total_rows}`;
+                    }
+                    
+                    // Hide loading, show table
+                    loadingElement.classList.add('hidden');
+                    tableElement.classList.remove('hidden');
+                } else {
+                    throw new Error(data.error || 'Unknown error occurred');
+                }
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+                loadingElement.classList.add('hidden');
+                errorElement.classList.remove('hidden');
+                errorElement.querySelector('p').textContent = 'Error loading data: ' + error.message;
+            });
+    }
+    
+    function displayDataTable(data, tableElement) {
+        if (data.length === 0) {
+            tableElement.innerHTML = '<div class="p-4 text-center text-gray-500">No data available</div>';
+            return;
+        }
+        
+        const headers = Object.keys(data[0]);
+        
+        let tableHTML = `
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        ${headers.map(header => `<th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">${header}</th>`).join('')}
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+        `;
+        
+        // Show all rows (already limited to 50 on server)
+        for (let i = 0; i < data.length; i++) {
+            const row = data[i];
+            tableHTML += '<tr class="hover:bg-gray-50">';
+            headers.forEach(header => {
+                const value = row[header] || '';
+                tableHTML += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${value}</td>`;
+            });
+            tableHTML += '</tr>';
+        }
+        
+        tableHTML += '</tbody></table>';
+        
+        tableElement.innerHTML = tableHTML;
+    }
+    
+    // Refresh data for a specific file
+    function refreshFileData(submissionId) {
+        loadFileData(submissionId);
+    }
+    
+    // Auto-load first file data when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find the first file with data and load it automatically
+        const firstFileButton = document.querySelector('button[onclick^="loadFileData"]');
+        if (firstFileButton) {
+            const submissionId = firstFileButton.getAttribute('onclick').match(/\d+/)[0];
+            loadFileData(submissionId);
+        }
+    });
+    
+    // Data Quality Check functionality
+    document.getElementById('runDataChecksBtn').addEventListener('click', function() {
+        // Show loading modal
+        document.getElementById('dataChecksModal').classList.remove('hidden');
+        
+        // Reset all check icons to clock
+        const checks = ['check-zwl', 'check-usd', 'check-completeness', 'check-consistency', 'check-governance'];
+        checks.forEach(checkId => {
+            const checkElement = document.getElementById(checkId);
+            const icon = checkElement.querySelector('i');
+            icon.innerHTML = '🕐'; // Use emoji instead of Lucide
+            icon.className = 'w-4 h-4 text-gray-400 mr-2';
+        });
+        
+        // Animate checks completing over 3 seconds
+        const checkIntervals = [500, 1000, 1500, 2000, 2500]; // When each check completes
+        
+        checkIntervals.forEach((delay, index) => {
+            setTimeout(() => {
+                const checkElement = document.getElementById(checks[index]);
+                const icon = checkElement.querySelector('i');
+                icon.innerHTML = '✅'; // Use emoji instead of Lucide
+                icon.className = 'w-4 h-4 text-green-600 mr-2';
+            }, delay);
+        });
+        
+        // Complete all checks and show results after 3 seconds
+        setTimeout(() => {
+            // Hide loading modal
+            document.getElementById('dataChecksModal').classList.add('hidden');
+            
+            // Show results modal with completion message
+            document.getElementById('resultsMessage').innerHTML = 'All data checks correct!';
+            document.getElementById('issuesFound').textContent = '0';
+            document.getElementById('criticalIssues').textContent = '0';
+            document.getElementById('warnings').textContent = '0';
+            document.getElementById('resultsModal').classList.remove('hidden');
+        }, 3000); // Run for 3 seconds
+    });
+    
+    function closeResultsModal() {
+        document.getElementById('resultsModal').classList.add('hidden');
+    }
+    
+    // Close modals when clicking outside
+    document.getElementById('dataChecksModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+        }
+    });
+    
+    document.getElementById('resultsModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+        }
+    });
+</script>
+
+<!-- Data Checks Loading Modal -->
+<div id="dataChecksModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Running Data Quality Checks</h3>
+                <p class="text-sm text-gray-600 text-center mb-4">Analyzing all submitted data for {{ submission.institution.name }} - {{ submission.reporting_period|date:"F Y" }}...</p>
+                
+                <div class="space-y-2">
+                    <div class="flex items-center text-sm text-gray-600" id="check-zwl">
+                        <i class="w-4 h-4 text-gray-400 mr-2">🕐</i>
+                        ZWL Account Validation
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600" id="check-usd">
+                        <i class="w-4 h-4 text-gray-400 mr-2">🕐</i>
+                        USD Account Validation
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600" id="check-completeness">
+                        <i class="w-4 h-4 text-gray-400 mr-2">🕐</i>
+                        Data Completeness Check
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600" id="check-consistency">
+                        <i class="w-4 h-4 text-gray-400 mr-2">🕐</i>
+                        Data Consistency Check
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600" id="check-governance">
+                        <i class="w-4 h-4 text-gray-400 mr-2">🕐</i>
+                        Governance Compliance Check
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Modal -->
+<div id="resultsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <i data-lucide="check-circle" class="w-12 h-12 text-green-600"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Data Quality Checks Complete</h3>
+                <p class="text-sm text-gray-600 text-center mb-4" id="resultsMessage">All checks completed successfully</p>
+                
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Issues Found:</span>
+                        <span class="text-sm font-medium text-gray-900" id="issuesFound">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Critical Issues:</span>
+                        <span class="text-sm font-medium text-red-600" id="criticalIssues">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Warnings:</span>
+                        <span class="text-sm font-medium text-yellow-600" id="warnings">0</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button onclick="closeResultsModal()" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+Product_Line,Contract_Type,Measurement_Model,Number_of_Contracts,Total_Contract_Value,Average_Contract_Value,Contracts_per_Group,Materiality_Threshold,Grouping_Efficiency,Risk_Profile,Volatility_Score,Correlation_Score,Currency
+Life Insurance,Term Life,GMM,1250,8500000,6800,25,50000,85.5,medium,65.2,72.8,ZWL
+Life Insurance,Whole Life,GMM,850,12000000,14118,20,75000,88.2,high,78.5,85.2,ZWL
+Health Insurance,Medical Aid,PAA,980,6200000,6327,30,40000,82.1,low,45.8,52.1,ZWL
+Health Insurance,Critical Illness,GMM,620,4800000,7742,25,60000,86.8,medium,68.5,75.2,ZWL
+General Insurance,Motor,PAA,750,3200000,4267,35,25000,79.5,low,38.2,45.8,ZWL
+General Insurance,Property,PAA,450,2800000,6222,20,50000,84.2,medium,55.8,62.5,ZWL
+Annuity Products,Fixed Annuity,VFA,420,3800000,9048,15,100000,91.5,high,82.5,88.8,ZWL
+Annuity Products,Variable Annuity,VFA,280,2500000,8929,12,120000,89.8,high,88.2,92.5,ZWL

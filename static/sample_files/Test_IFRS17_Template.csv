@@ -1,0 +1,4 @@
+Institution,Reporting_Period,Contract_Group,Contractual_Service_Margin,Risk_Adjustment,Loss_Component,Total_Liabilities,Equity_Impact,Profit_Margin,Solvency_Ratio,Currency
+[Your Institution Name],[YYYY-MM-DD],[Contract Group Name],[CSM Amount],[Risk Adj Amount],[Loss Amount],[Total Liability],[Equity Impact],[Profit %],[Solvency %],[ZWL]
+Sample Insurance Co,2024-09-30,Life Insurance Group A,2600000,1230000,0,8450000,-350000,30.8,147,ZWL
+Sample Insurance Co,2024-09-30,Health Insurance Group B,2125000,980000,0,6250000,-250000,28.5,142,ZWL

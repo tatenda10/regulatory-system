@@ -1,0 +1,287 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} - IPEC{% endblock %}
+
+{% block content %}
+<div class="p-4 sm:p-6">
+    <!-- Page Header -->
+    <div class="mb-6">
+        <div class="flex items-center justify-between">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ title }}</h1>
+                <p class="text-gray-600">Review data quality and governance across all institutions and reporting periods</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="runDataChecksBtn" 
+                        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                    <i data-lucide="play-circle" class="w-4 h-4 mr-2"></i>
+                    Run Data Checks
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-blue-100 rounded-md">
+                    <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Reporting Periods</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ total_periods }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-green-100 rounded-md">
+                    <i data-lucide="file-text" class="w-5 h-5 text-green-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Total Submissions</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ total_submissions }}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-yellow-100 rounded-md">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Pending Review</p>
+                    <p class="text-lg font-semibold text-gray-900">
+                        {% for period in reporting_periods %}
+                            {{ period.under_review|add:period.rejected }}
+                        {% empty %}
+                            0
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div class="flex items-center">
+                <div class="p-2 bg-purple-100 rounded-md">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-purple-600"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-600">Approved</p>
+                    <p class="text-lg font-semibold text-gray-900">
+                        {% for period in reporting_periods %}
+                            {{ period.approved }}
+                        {% empty %}
+                            0
+                        {% endfor %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reporting Periods List -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900">Reporting Periods</h3>
+            <p class="text-sm text-gray-600">Click on a reporting period to review all submitted documents</p>
+        </div>
+        
+        {% if reporting_periods %}
+            <div class="divide-y divide-gray-200">
+                {% for period in reporting_periods %}
+                <div class="p-6 hover:bg-gray-50 transition-colors">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">
+                                    {{ period.period|date:"F Y" }}
+                                </h4>
+                                <p class="text-sm text-gray-600">
+                                    {{ period.total_submissions }} submission{{ period.total_submissions|pluralize }} 
+                                    from {{ period.institutions|length }} institution{{ period.institutions|length|pluralize }}
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <!-- Status Summary -->
+                            <div class="flex items-center space-x-3">
+                                {% if period.approved > 0 %}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    {{ period.approved }} Approved
+                                </span>
+                                {% endif %}
+                                {% if period.under_review > 0 %}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    {{ period.under_review }} Under Review
+                                </span>
+                                {% endif %}
+                                {% if period.rejected > 0 %}
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    {{ period.rejected }} Rejected
+                                </span>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Review Button -->
+                            <a href="{% url 'core:reporting-period-detail' period.period.year period.period.month %}" 
+                               class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center text-sm">
+                                <i data-lucide="eye" class="w-4 h-4 mr-2"></i>
+                                Review
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="p-8 text-center">
+                <i data-lucide="file-x" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
+                <p class="text-gray-500">No reporting periods found</p>
+                <p class="text-sm text-gray-400 mt-1">Institutions need to submit IFRS 17 data to appear here</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Data Checks Loading Modal -->
+<div id="dataChecksModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Running Data Quality Checks</h3>
+                <p class="text-sm text-gray-600 text-center mb-4">Please wait while we analyze all submitted data...</p>
+                
+                <div class="space-y-2">
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2"></i>
+                        ZWL Account Validation
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2"></i>
+                        USD Account Validation
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2"></i>
+                        Data Completeness Check
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2"></i>
+                        Data Consistency Check
+                    </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i data-lucide="check" class="w-4 h-4 text-green-600 mr-2"></i>
+                        Governance Compliance Check
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Modal -->
+<div id="resultsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden z-50">
+    <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-lg w-full">
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-4">
+                    <i data-lucide="check-circle" class="w-12 h-12 text-green-600"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Data Quality Checks Complete</h3>
+                <p class="text-sm text-gray-600 text-center mb-4" id="resultsMessage">All checks completed successfully</p>
+                
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Issues Found:</span>
+                        <span class="text-sm font-medium text-gray-900" id="issuesFound">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Critical Issues:</span>
+                        <span class="text-sm font-medium text-red-600" id="criticalIssues">0</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600">Warnings:</span>
+                        <span class="text-sm font-medium text-yellow-600" id="warnings">0</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center">
+                    <button onclick="closeResultsModal()" 
+                            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Data Checks functionality
+    document.getElementById('runDataChecksBtn').addEventListener('click', function() {
+        // Show loading modal
+        document.getElementById('dataChecksModal').classList.remove('hidden');
+        
+        // Run data quality checks
+        fetch('{% url "core:run-data-quality-checks" %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hide loading modal
+            document.getElementById('dataChecksModal').classList.add('hidden');
+            
+            if (data.success) {
+                // Show results modal
+                document.getElementById('resultsMessage').textContent = data.message;
+                document.getElementById('issuesFound').textContent = data.issues_found;
+                document.getElementById('criticalIssues').textContent = data.critical_issues;
+                document.getElementById('warnings').textContent = data.warnings;
+                document.getElementById('resultsModal').classList.remove('hidden');
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('dataChecksModal').classList.add('hidden');
+            alert('Error running data quality checks: ' + error.message);
+        });
+    });
+    
+    function closeResultsModal() {
+        document.getElementById('resultsModal').classList.add('hidden');
+    }
+    
+    // Close modals when clicking outside
+    document.getElementById('dataChecksModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+        }
+    });
+    
+    document.getElementById('resultsModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
+        }
+    });
+</script>
+{% endblock %}

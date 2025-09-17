@@ -1,0 +1,5 @@
+Transition_Phase,IFRS4_Liabilities,IFRS4_Premiums,IFRS4_Claims,IFRS17_Liabilities,IFRS17_CSM,IFRS17_Risk_Adjustment,Liability_Adjustment,Equity_Impact,PNL_Impact,Implementation_Status,Data_Quality_Score,Process_Maturity_Score,System_Readiness_Score,Currency
+Life Insurance,8500000,3200000,2800000,12280000,2600000,1230000,3780000,-450000,-180000,completed,95.5,92.8,98.2,ZWL
+Health Insurance,6200000,2500000,2200000,9355000,2125000,980000,3155000,-320000,-150000,completed,93.2,90.5,96.8,ZWL
+General Insurance,4200000,1800000,1600000,6350000,1500000,650000,2150000,-280000,-120000,completed,91.8,88.2,94.5,ZWL
+Annuity Products,3800000,1500000,1400000,5160000,1020000,520000,1360000,-200000,-80000,completed,89.5,85.8,92.1,ZWL

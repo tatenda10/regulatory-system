@@ -1,0 +1,5 @@
+Measurement_Model,Contract_Group,Contract_Liability_Balance,Risk_Adjustment,CSM_Balance,Loss_Component,Total_Liability,Currency
+GMM,Life Insurance Group A,8450000,1230000,2600000,0,12280000,ZWL
+GMM,Health Insurance Group B,6250000,980000,2125000,0,9355000,ZWL
+PAA,Annuity Group C,4200000,650000,1500000,0,6350000,ZWL
+VFA,Variable Annuity Group,3800000,520000,1020000,-180000,5160000,ZWL

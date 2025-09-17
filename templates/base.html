@@ -140,7 +140,7 @@
         
         <!-- Logo Section -->
         <div class="px-6 py-2">
-            <h1 class="text-2xl font-bold text-blue-600">Regulatory System</h1>
+            <h1 class="text-xl leading-6 font-bold text-blue-600 tracking-tight">IFRS17 Regulatory System</h1>
         </div>
         
         <!-- Navigation Menu -->
@@ -188,13 +188,31 @@
                         Data & Validation
                     </a>
                     
+                    <!-- 8. Data Quality Review -->
+                    <a href="{% url 'core:data-quality-review' %}" class="sidebar-link {% if request.resolver_match.url_name in 'data-quality-review,reporting-period-detail' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name in 'data-quality-review,reporting-period-detail' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="shield-check" class="w-4 h-4 mr-3"></i>
+                        Data Quality Review
+                    </a>
+                    
                     <!-- 8. Reports & Exports -->
                     <a href="{% url 'core:reports-exports' %}" class="sidebar-link {% if request.resolver_match.url_name == 'reports-exports' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'reports-exports' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
                         <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
                         Reports & Exports
                     </a>
                     
-                    <!-- 9. Settings & Administration -->
+                    <!-- 9. Institution Management -->
+                    <a href="{% url 'core:institutions-list' %}" class="sidebar-link {% if request.resolver_match.url_name in 'institutions-list,institution-add,institution-detail,institution-edit' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name in 'institutions-list,institution-add,institution-detail,institution-edit' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="building-2" class="w-4 h-4 mr-3"></i>
+                        Institutions
+                    </a>
+                    
+                    <!-- 10. IFRS 17 Submissions -->
+                    <a href="{% url 'core:ifrs17-submissions' %}" class="sidebar-link {% if request.resolver_match.url_name in 'ifrs17-submissions,ifrs17-submission-detail' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name in 'ifrs17-submissions,ifrs17-submission-detail' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
+                        <i data-lucide="file-text" class="w-4 h-4 mr-3"></i>
+                        Data Submissions
+                    </a>
+                    
+                    <!-- 11. Settings & Administration -->
                     <a href="{% url 'core:settings-admin' %}" class="sidebar-link {% if request.resolver_match.url_name == 'settings-admin' %}active{% endif %} flex items-center px-3 py-1.5 text-sm font-medium {% if request.resolver_match.url_name == 'settings-admin' %}text-blue-600{% else %}text-gray-600{% endif %} rounded-md">
                         <i data-lucide="settings" class="w-4 h-4 mr-3"></i>
                         Settings

@@ -1,0 +1,4 @@
+Rate_Component,Risk_Free_Rate,Liquidity_Premium,Credit_Spread,Total_Discount_Rate,Finance_Income,Finance_Expense,Net_Finance_Result,Rate_Sensitivity_1bp,Rate_Sensitivity_10bp,Rate_Sensitivity_100bp,USD_Discount_Rate,ZWL_Discount_Rate,Exchange_Rate,Currency
+Government Bonds,8.50,1.25,0.75,10.50,1250000,980000,270000,25000,250000,2500000,6.25,10.50,0.25,ZWL
+Corporate Bonds,8.50,1.25,2.50,12.25,850000,720000,130000,18000,180000,1800000,7.50,12.25,0.25,ZWL
+Insurance Contracts,8.50,1.25,1.50,11.25,2100000,1650000,450000,42000,420000,4200000,6.75,11.25,0.25,ZWL

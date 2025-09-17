@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbrl xmlns="http://www.xbrl.org/2003/instance" 
+      xmlns:ifrs17="http://www.ifrs.org/xbrl/ifrs/17/2021-01-01" 
+      xmlns:link="http://www.xbrl.org/2003/linkbase" 
+      xmlns:xlink="http://www.w3.org/1999/xlink">
+  
+  <!-- Context for Q3 2024 Test -->
+  <context id="Q3_2024_Test">
+    <entity>
+      <identifier scheme="http://www.ifrs.org/entities">Test Insurance Company</identifier>
+    </entity>
+    <period>
+      <startDate>2024-07-01</startDate>
+      <endDate>2024-09-30</endDate>
+    </period>
+  </context>
+  
+  <!-- CSM Roll-forward Data -->
+  <ifrs17:ContractualServiceMarginRollForward contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">2.6</ifrs17:ContractualServiceMarginRollForward>
+  <ifrs17:ContractualServiceMarginOpeningBalance contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">2.1</ifrs17:ContractualServiceMarginOpeningBalance>
+  <ifrs17:ContractualServiceMarginNewContracts contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">0.45</ifrs17:ContractualServiceMarginNewContracts>
+  <ifrs17:ContractualServiceMarginInterestAccretion contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">0.125</ifrs17:ContractualServiceMarginInterestAccretion>
+  <ifrs17:ContractualServiceMarginExperienceAdjustments contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">-0.075</ifrs17:ContractualServiceMarginExperienceAdjustments>
+  <ifrs17:ContractualServiceMarginRelease contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">0.18</ifrs17:ContractualServiceMarginRelease>
+  
+  <!-- Insurance Contract Liabilities -->
+  <ifrs17:InsuranceContractLiabilitiesTotal contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">12.28</ifrs17:InsuranceContractLiabilitiesTotal>
+  <ifrs17:InsuranceContractLiabilitiesGMM contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">8.45</ifrs17:InsuranceContractLiabilitiesGMM>
+  <ifrs17:InsuranceContractLiabilitiesPAA contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">4.2</ifrs17:InsuranceContractLiabilitiesPAA>
+  <ifrs17:InsuranceContractLiabilitiesVFA contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">3.8</ifrs17:InsuranceContractLiabilitiesVFA>
+  
+  <!-- Risk Adjustments -->
+  <ifrs17:RiskAdjustmentTotal contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">1.23</ifrs17:RiskAdjustmentTotal>
+  <ifrs17:RiskAdjustmentLifeInsurance contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">0.85</ifrs17:RiskAdjustmentLifeInsurance>
+  <ifrs17:RiskAdjustmentHealthInsurance contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">0.38</ifrs17:RiskAdjustmentHealthInsurance>
+  
+  <!-- Loss Components -->
+  <ifrs17:LossComponentTotal contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">-0.18</ifrs17:LossComponentTotal>
+  <ifrs17:LossComponentOnerousContracts contextRef="Q3_2024_Test" unitRef="ZWL_Millions" decimals="2">-0.18</ifrs17:LossComponentOnerousContracts>
+  <ifrs17:LossComponentCount contextRef="Q3_2024_Test" decimals="0">15</ifrs17:LossComponentCount>
+  
+  <!-- Units -->
+  <unit id="ZWL_Millions">
+    <measure>ZWL</measure>
+  </unit>
+  
+</xbrl>

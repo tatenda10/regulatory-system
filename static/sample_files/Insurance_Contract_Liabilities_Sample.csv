@@ -1,0 +1,12 @@
+Institution,Reporting_Period,Measurement_Model,Contract_Group,Contract_Liability_Balance,Risk_Adjustment,CSM_Balance,Loss_Component,Total_Liability,Currency
+Zimbabwe Insurance Co,Q3-2024,GMM,Life Insurance Group A,8450000,1230000,2600000,0,12280000,ZWL
+Zimbabwe Insurance Co,Q3-2024,GMM,Health Insurance Group B,6250000,980000,2125000,0,9355000,ZWL
+Zimbabwe Insurance Co,Q3-2024,PAA,Annuity Group C,4200000,650000,1500000,0,6350000,ZWL
+Zimbabwe Insurance Co,Q3-2024,VFA,Variable Annuity Group,3800000,520000,1200000,-180000,5340000,ZWL
+First Mutual Life,Q3-2024,GMM,Life Insurance Group A,12500000,1850000,4040000,0,18390000,ZWL
+First Mutual Life,Q3-2024,GMM,Health Insurance Group B,8200000,1350000,2485000,0,12035000,ZWL
+First Mutual Life,Q3-2024,PAA,Annuity Group C,5800000,890000,1800000,0,8490000,ZWL
+NicozDiamond Insurance,Q3-2024,GMM,General Insurance Group A,6800000,950000,1850000,0,9600000,ZWL
+NicozDiamond Insurance,Q3-2024,GMM,General Insurance Group B,5200000,720000,1445000,0,7365000,ZWL
+FBC Insurance,Q3-2024,GMM,Life Insurance Group A,9200000,1450000,3115000,0,13765000,ZWL
+FBC Insurance,Q3-2024,GMM,Health Insurance Group B,6800000,1100000,2205000,0,10105000,ZWL

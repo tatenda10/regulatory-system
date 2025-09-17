@@ -1,0 +1,10 @@
+Report_Section,Contract_Group,Contractual_Service_Margin,Risk_Adjustment,Loss_Component,Total_Liabilities,Equity_Impact,Profit_Margin,Solvency_Ratio,Currency
+CSM_Rollforward,Life Insurance Group A,2600000,1230000,0,8450000,-350000,30.8,147,ZWL
+CSM_Rollforward,Health Insurance Group B,2125000,980000,0,6250000,-250000,28.5,142,ZWL
+CSM_Rollforward,Annuity Group C,1500000,650000,0,4200000,-180000,25.2,138,ZWL
+Contract_Liabilities,Life Insurance Group A,2600000,1230000,0,8450000,-350000,30.8,147,ZWL
+Contract_Liabilities,Health Insurance Group B,2125000,980000,0,6250000,-250000,28.5,142,ZWL
+Loss_Component,Life Insurance Group A,0,0,-180000,0,0,0,0,ZWL
+Loss_Component,Health Insurance Group B,0,0,-95000,0,0,0,0,ZWL
+Risk_Adjustment,Life Insurance Group A,0,1230000,0,0,0,0,0,ZWL
+Risk_Adjustment,Health Insurance Group B,0,980000,0,0,0,0,0,ZWL

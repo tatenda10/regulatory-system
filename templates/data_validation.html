@@ -7,8 +7,16 @@
 <div class="p-4 sm:p-6">
     <!-- Page Header -->
     <div class="mb-6">
+        <div class="flex justify-between items-center">
+            <div>
         <h1 class="text-2xl font-bold text-gray-900 mb-2">Data & Validation</h1>
-        <p class="text-gray-600">Submission History and Data Quality Management</p>
+                <p class="text-gray-600">IFRS 17 Data Upload, Validation and Quality Management</p>
+            </div>
+            <button onclick="openUploadModal()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                <i data-lucide="upload" class="w-4 h-4 mr-2"></i>
+                Upload IFRS 17 Data
+            </button>
+        </div>
     </div>
 
     <!-- Summary Cards -->
@@ -20,7 +28,7 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-gray-600">Total Submissions</p>
-                    <p class="text-lg font-semibold text-gray-900">247</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ total_submissions }}</p>
                 </div>
             </div>
         </div>
@@ -32,7 +40,7 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-gray-600">Successful</p>
-                    <p class="text-lg font-semibold text-gray-900">231</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ successful_submissions }}</p>
                 </div>
             </div>
         </div>
@@ -44,7 +52,7 @@
                 </div>
                 <div class="ml-3">
                     <p class="text-sm text-gray-600">Failed</p>
-                    <p class="text-lg font-semibold text-gray-900">16</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ failed_submissions }}</p>
                 </div>
             </div>
         </div>
@@ -55,349 +63,593 @@
                     <i data-lucide="alert-triangle" class="w-4 h-4 text-yellow-600"></i>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm text-gray-600">Validation Errors</p>
-                    <p class="text-lg font-semibold text-gray-900">23</p>
+                    <p class="text-sm text-gray-600">Pending Review</p>
+                    <p class="text-lg font-semibold text-gray-900">{{ pending_submissions }}</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Grid -->
+    <!-- Data Upload Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">IFRS 17 Data Upload Requirements</h2>
+        
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        <!-- Submission History -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div class="flex items-center mb-4">
-                <i data-lucide="file-text" class="w-5 h-5 text-blue-600 mr-2"></i>
-                <h2 class="text-lg font-semibold text-gray-900">Submission History</h2>
-            </div>
-            
-            <div class="space-y-4">
-                <!-- Recent Submissions -->
+            <!-- Required Reports -->
+            <div>
+                <h3 class="text-md font-medium text-gray-900 mb-3">Required IFRS 17 Reports</h3>
                 <div class="space-y-3">
-                    <h4 class="font-medium text-gray-900">Recent Submissions</h4>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-md">
-                            <div class="flex items-center">
-                                <i data-lucide="file" class="w-4 h-4 text-green-600 mr-2"></i>
+                    <div class="flex items-start p-3 bg-blue-50 border border-blue-200 rounded-md">
+                        <i data-lucide="file-text" class="w-5 h-5 text-blue-600 mr-3 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-medium text-green-900">Q3_2024_Solvency_Report.xbrl</div>
-                                    <div class="text-xs text-green-700">Submitted: 15 Nov 2024 • 2.3 MB</div>
+                            <h4 class="font-medium text-blue-900">Contractual Service Margin (CSM) Roll-forward</h4>
+                            <p class="text-sm text-blue-700">Quarterly submission showing CSM opening balance, additions, releases, and closing balance</p>
+                            <p class="text-xs text-blue-600 mt-1">Format: XBRL, Excel, CSV</p>
                                 </div>
-                            </div>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Success</span>
                         </div>
                         
-                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-md">
-                            <div class="flex items-center">
-                                <i data-lucide="file" class="w-4 h-4 text-green-600 mr-2"></i>
+                    <div class="flex items-start p-3 bg-green-50 border border-green-200 rounded-md">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-green-600 mr-3 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-medium text-green-900">Monthly_Risk_Dashboard.xml</div>
-                                    <div class="text-xs text-green-700">Submitted: 5 Dec 2024 • 1.8 MB</div>
+                            <h4 class="font-medium text-green-900">Insurance Contract Liabilities</h4>
+                            <p class="text-sm text-green-700">Detailed breakdown of insurance contract liabilities by measurement model (GMM, PAA, VFA)</p>
+                            <p class="text-xs text-green-600 mt-1">Format: XBRL, Excel, CSV</p>
                                 </div>
-                            </div>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Success</span>
                         </div>
                         
-                        <div class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-md">
-                            <div class="flex items-center">
-                                <i data-lucide="file" class="w-4 h-4 text-red-600 mr-2"></i>
+                    <div class="flex items-start p-3 bg-purple-50 border border-purple-200 rounded-md">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-purple-600 mr-3 mt-0.5"></i>
                                 <div>
-                                    <div class="text-sm font-medium text-red-900">IFRS17_Quarterly_Update.csv</div>
-                                    <div class="text-xs text-red-700">Submitted: 10 Dec 2024 • 0.9 MB</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Failed</span>
+                            <h4 class="font-medium text-purple-900">Loss Component Analysis</h4>
+                            <p class="text-sm text-purple-700">Analysis of onerous contracts and loss components recognized in P&L</p>
+                            <p class="text-xs text-purple-600 mt-1">Format: XBRL, Excel, CSV</p>
+                    </div>
+                </div>
+
+                    <div class="flex items-start p-3 bg-orange-50 border border-orange-200 rounded-md">
+                        <i data-lucide="bar-chart-2" class="w-5 h-5 text-orange-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-orange-900">Risk Adjustment Reconciliation</h4>
+                            <p class="text-sm text-orange-700">Reconciliation of risk adjustments and their impact on contract liabilities</p>
+                            <p class="text-xs text-orange-600 mt-1">Format: XBRL, Excel, CSV</p>
+                        </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- File Type Breakdown -->
-                <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
-                    <h4 class="font-medium text-blue-900 mb-3">File Type Breakdown</h4>
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-blue-700">XBRL Files</span>
-                            <span class="font-medium text-blue-900">156 (63%)</span>
+            <!-- Additional Data Sources -->
+            <div>
+                <h3 class="text-md font-medium text-gray-900 mb-3">Additional Data Sources</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start p-3 bg-emerald-50 border border-emerald-200 rounded-md">
+                        <i data-lucide="dollar-sign" class="w-5 h-5 text-emerald-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-emerald-900">Insurance Revenue & Service Performance</h4>
+                            <p class="text-sm text-emerald-700">Revenue recognition and service delivery metrics by product line</p>
+                            <p class="text-xs text-emerald-600 mt-1">Format: XBRL, Excel, CSV</p>
                         </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-blue-700">XML Files</span>
-                            <span class="font-medium text-blue-900">67 (27%)</span>
+                    </div>
+                    
+                    <div class="flex items-start p-3 bg-teal-50 border border-teal-200 rounded-md">
+                        <i data-lucide="trending-up" class="w-5 h-5 text-teal-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-teal-900">CSM Profitability Analysis</h4>
+                            <p class="text-sm text-teal-700">Contractual Service Margin profitability and ROI analysis</p>
+                            <p class="text-xs text-teal-600 mt-1">Format: XBRL, Excel, CSV</p>
+            </div>
+        </div>
+
+                    <div class="flex items-start p-3 bg-indigo-50 border border-indigo-200 rounded-md">
+                        <i data-lucide="percent" class="w-5 h-5 text-indigo-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-indigo-900">Discount Rates & Finance Result</h4>
+                            <p class="text-sm text-indigo-700">Discount rates and insurance finance calculations</p>
+                            <p class="text-xs text-indigo-600 mt-1">Format: XBRL, Excel, CSV</p>
                         </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-blue-700">CSV Files</span>
-                            <span class="font-medium text-blue-900">24 (10%)</span>
+            </div>
+            
+                    <div class="flex items-start p-3 bg-cyan-50 border border-cyan-200 rounded-md">
+                        <i data-lucide="shield" class="w-5 h-5 text-cyan-600 mr-3 mt-0.5"></i>
+                            <div>
+                            <h4 class="font-medium text-cyan-900">Reinsurance Held</h4>
+                            <p class="text-sm text-cyan-700">Reinsurance assets and recoverable amounts analysis</p>
+                            <p class="text-xs text-cyan-600 mt-1">Format: XBRL, Excel, CSV</p>
+                            </div>
+                        </div>
+                    
+                    <div class="flex items-start p-3 bg-amber-50 border border-amber-200 rounded-md">
+                        <i data-lucide="refresh-cw" class="w-5 h-5 text-amber-600 mr-3 mt-0.5"></i>
+                            <div>
+                            <h4 class="font-medium text-amber-900">IFRS4 to IFRS17 Transition</h4>
+                            <p class="text-sm text-amber-700">Transition tracking and implementation status</p>
+                            <p class="text-xs text-amber-600 mt-1">Format: XBRL, Excel, CSV</p>
+                            </div>
+                        </div>
+                    
+                    <div class="flex items-start p-3 bg-rose-50 border border-rose-200 rounded-md">
+                        <i data-lucide="layers" class="w-5 h-5 text-rose-600 mr-3 mt-0.5"></i>
+                            <div>
+                            <h4 class="font-medium text-rose-900">Contract Grouping</h4>
+                            <p class="text-sm text-rose-700">Contract aggregation and grouping criteria</p>
+                            <p class="text-xs text-rose-600 mt-1">Format: XBRL, Excel, CSV</p>
+                    </div>
+                </div>
+
+                    <div class="flex items-start p-3 bg-red-50 border border-red-200 rounded-md">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-red-600 mr-3 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-red-900">Data Quality & Governance</h4>
+                            <p class="text-sm text-red-700">Quality checks for ZWL and USD accounts</p>
+                            <p class="text-xs text-red-600 mt-1">Format: XBRL, Excel, CSV</p>
+                        </div>
+                        </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Submission Statistics -->
-                <div class="bg-gray-50 border border-gray-200 rounded-md p-4">
-                    <h4 class="font-medium text-gray-900 mb-2">Submission Statistics</h4>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div class="text-center">
-                            <div class="text-lg font-bold text-green-600">93.5%</div>
-                            <div class="text-gray-600">Success Rate</div>
+        <!-- Data Quality Standards -->
+            <div>
+                <h3 class="text-md font-medium text-gray-900 mb-3">Data Quality Standards</h3>
+                <div class="space-y-3">
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-md">
+                        <h4 class="font-medium text-gray-900 mb-2">File Format Requirements</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• XBRL files must follow IFRS 17 taxonomy</li>
+                            <li>• Excel files must use standardized templates</li>
+                            <li>• CSV files must include proper headers</li>
+                            <li>• Maximum file size: 50MB per submission</li>
+                        </ul>
                         </div>
-                        <div class="text-center">
-                            <div class="text-lg font-bold text-blue-600">2.1 MB</div>
-                            <div class="text-gray-600">Avg File Size</div>
+                    
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-md">
+                        <h4 class="font-medium text-gray-900 mb-2">Validation Rules</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• All monetary values must be in Zimbabwe Dollars (ZWL)</li>
+                            <li>• Dates must be in YYYY-MM-DD format</li>
+                            <li>• Coverage units must reconcile with CSM releases</li>
+                            <li>• Balance sheet must balance</li>
+                        </ul>
+                        </div>
+                    
+                    <div class="p-3 bg-gray-50 border border-gray-200 rounded-md">
+                        <h4 class="font-medium text-gray-900 mb-2">Submission Deadlines</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Quarterly reports: 45 days after quarter end</li>
+                            <li>• Annual reports: 90 days after year end</li>
+                            <li>• Ad-hoc reports: As requested by IPEC</li>
+                            <li>• Late submissions may incur penalties</li>
+                        </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Validation Errors -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <div class="flex items-center mb-4">
-                <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600 mr-2"></i>
-                <h2 class="text-lg font-semibold text-gray-900">Validation Errors</h2>
+    <!-- Sample Files Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <h2 class="text-lg font-semibold text-gray-900 mb-4">Sample Files & Templates</h2>
+        <p class="text-gray-600 mb-4">Download sample files and templates to understand the required data format for each report type.</p>
+        
+        <!-- Test Files for Upload -->
+        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-md">
+            <h3 class="text-md font-medium text-blue-900 mb-2">🧪 Test Upload Files (Single Institution)</h3>
+            <p class="text-sm text-blue-700 mb-3">Download these files to test the upload functionality. Select an institution in the upload form, then upload the corresponding file.</p>
+            
+            <!-- Core IFRS 17 Reports -->
+            <div class="mb-4">
+                <h4 class="text-sm font-medium text-blue-800 mb-2">Core IFRS 17 Reports</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <a href="{% static 'sample_files/test_uploads/CSM_Rollforward_Test.csv' %}" download class="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        CSM Roll-forward
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Insurance_Contract_Liabilities_Test.csv' %}" download class="bg-green-600 text-white px-3 py-2 rounded-md hover:bg-green-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Contract Liabilities
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Loss_Component_Analysis_Test.csv' %}" download class="bg-purple-600 text-white px-3 py-2 rounded-md hover:bg-purple-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Loss Component
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Risk_Adjustment_Reconciliation_Test.csv' %}" download class="bg-orange-600 text-white px-3 py-2 rounded-md hover:bg-orange-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Risk Adjustment
+                    </a>
+                                </div>
             </div>
             
-            <div class="space-y-4">
-                <!-- Coverage Units vs CSM Release -->
-                <div class="bg-red-50 border border-red-200 rounded-md p-4">
-                    <h4 class="font-medium text-red-900 mb-3">Coverage Units vs CSM Release</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-sm font-medium text-red-900">Life Insurance Group A</div>
-                                <div class="text-xs text-red-700">Coverage Units: 1,250 vs CSM Release: 1,180</div>
-                            </div>
-                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Error</span>
+            <!-- Additional Data Sources -->
+            <div class="mb-4">
+                <h4 class="text-sm font-medium text-blue-800 mb-2">Additional Data Sources</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    <a href="{% static 'sample_files/test_uploads/Insurance_Revenue_Test.csv' %}" download class="bg-emerald-600 text-white px-3 py-2 rounded-md hover:bg-emerald-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Revenue & Performance
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/CSM_Profitability_Test.csv' %}" download class="bg-teal-600 text-white px-3 py-2 rounded-md hover:bg-teal-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        CSM Profitability
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Discount_Rates_Test.csv' %}" download class="bg-indigo-600 text-white px-3 py-2 rounded-md hover:bg-indigo-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Discount Rates
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Reinsurance_Held_Test.csv' %}" download class="bg-cyan-600 text-white px-3 py-2 rounded-md hover:bg-cyan-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Reinsurance Held
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/IFRS4_Transition_Test.csv' %}" download class="bg-amber-600 text-white px-3 py-2 rounded-md hover:bg-amber-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        IFRS4 Transition
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Contract_Grouping_Test.csv' %}" download class="bg-rose-600 text-white px-3 py-2 rounded-md hover:bg-rose-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Contract Grouping
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Data_Quality_Test.csv' %}" download class="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Data Quality
+                    </a>
+                    <a href="{% static 'sample_files/test_uploads/Comprehensive_IFRS17_Test.csv' %}" download class="bg-gray-600 text-white px-3 py-2 rounded-md hover:bg-gray-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        Comprehensive
+                    </a>
+                                </div>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-sm font-medium text-red-900">Health Insurance Group B</div>
-                                <div class="text-xs text-red-700">Coverage Units: 890 vs CSM Release: 920</div>
+                        
+            <!-- XBRL Format -->
+                                <div>
+                <h4 class="text-sm font-medium text-blue-800 mb-2">XBRL Format</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <a href="{% static 'sample_files/test_uploads/IFRS17_Test_Report.xbrl' %}" download class="bg-pink-600 text-white px-3 py-2 rounded-md hover:bg-pink-700 transition-colors flex items-center text-sm">
+                        <i data-lucide="download" class="w-4 h-4 mr-2"></i>
+                        XBRL Report
+                    </a>
+                                </div>
                             </div>
-                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Error</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <div class="text-sm font-medium text-red-900">Annuity Group C</div>
-                                <div class="text-xs text-red-700">Coverage Units: 450 vs CSM Release: 450</div>
+                        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- CSM Roll-forward Sample -->
+            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-3">
+                    <i data-lucide="file-text" class="w-5 h-5 text-blue-600 mr-2"></i>
+                    <h3 class="font-medium text-gray-900">CSM Roll-forward</h3>
+                                </div>
+                <p class="text-sm text-gray-600 mb-3">Quarterly CSM balance movements and releases</p>
+                <div class="space-y-2">
+                    <a href="{% static 'sample_files/CSM_Rollforward_Sample.csv' %}" download class="block w-full text-center bg-blue-50 text-blue-700 px-3 py-2 rounded-md hover:bg-blue-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        Sample CSV
+                    </a>
+                    <a href="{% static 'sample_files/CSM_Rollforward_Template.xlsx' %}" download class="block w-full text-center bg-green-50 text-green-700 px-3 py-2 rounded-md hover:bg-green-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        Excel Template
+                    </a>
+                                </div>
+                        </div>
+                        
+            <!-- Insurance Contract Liabilities Sample -->
+            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-3">
+                    <i data-lucide="trending-up" class="w-5 h-5 text-green-600 mr-2"></i>
+                    <h3 class="font-medium text-gray-900">Contract Liabilities</h3>
+                                </div>
+                <p class="text-sm text-gray-600 mb-3">Breakdown by measurement model (GMM, PAA, VFA)</p>
+                <div class="space-y-2">
+                    <a href="{% static 'sample_files/Insurance_Contract_Liabilities_Sample.csv' %}" download class="block w-full text-center bg-blue-50 text-blue-700 px-3 py-2 rounded-md hover:bg-blue-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        Sample CSV
+                    </a>
+                    <button class="block w-full text-center bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm cursor-not-allowed">
+                        <i data-lucide="file" class="w-4 h-4 inline mr-1"></i>
+                        XBRL Template
+                    </button>
+                                </div>
                             </div>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Valid</span>
+
+            <!-- Loss Component Analysis Sample -->
+            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-3">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-purple-600 mr-2"></i>
+                    <h3 class="font-medium text-gray-900">Loss Component</h3>
                         </div>
+                <p class="text-sm text-gray-600 mb-3">Onerous contracts and loss components analysis</p>
+                <div class="space-y-2">
+                    <a href="{% static 'sample_files/Loss_Component_Analysis_Sample.csv' %}" download class="block w-full text-center bg-blue-50 text-blue-700 px-3 py-2 rounded-md hover:bg-blue-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        Sample CSV
+                    </a>
+                    <button class="block w-full text-center bg-gray-50 text-gray-700 px-3 py-2 rounded-md text-sm cursor-not-allowed">
+                        <i data-lucide="file" class="w-4 h-4 inline mr-1"></i>
+                        Excel Template
+                    </button>
                     </div>
                 </div>
 
-                <!-- Reconciliation Errors -->
+            <!-- Risk Adjustment Reconciliation Sample -->
+            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div class="flex items-center mb-3">
+                    <i data-lucide="bar-chart-2" class="w-5 h-5 text-orange-600 mr-2"></i>
+                    <h3 class="font-medium text-gray-900">Risk Adjustment</h3>
+                            </div>
+                <p class="text-sm text-gray-600 mb-3">Risk adjustments and their impact reconciliation</p>
+                <div class="space-y-2">
+                    <a href="{% static 'sample_files/Risk_Adjustment_Reconciliation_Sample.csv' %}" download class="block w-full text-center bg-blue-50 text-blue-700 px-3 py-2 rounded-md hover:bg-blue-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        Sample CSV
+                    </a>
+                    <a href="{% static 'sample_files/IFRS17_Comprehensive_Sample.xbrl' %}" download class="block w-full text-center bg-purple-50 text-purple-700 px-3 py-2 rounded-md hover:bg-purple-100 transition-colors text-sm">
+                        <i data-lucide="download" class="w-4 h-4 inline mr-1"></i>
+                        XBRL Sample
+                    </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+    <!-- Submission History -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div class="flex items-center mb-4">
+            <i data-lucide="file-text" class="w-5 h-5 text-blue-600 mr-2"></i>
+            <h2 class="text-lg font-semibold text-gray-900">Recent Submissions</h2>
+                            </div>
+        
+        {% if recent_submissions %}
+            <div class="space-y-2">
+                {% for submission in recent_submissions %}
+                <div class="flex items-center justify-between p-3 {% if submission.status == 'approved' %}bg-green-50 border border-green-200{% elif submission.status == 'rejected' %}bg-red-50 border border-red-200{% elif submission.status == 'under_review' %}bg-yellow-50 border border-yellow-200{% else %}bg-blue-50 border border-blue-200{% endif %} rounded-md">
+                    <div class="flex items-center">
+                        {% if submission.file_type == 'csv' %}
+                            <i data-lucide="file-text" class="w-4 h-4 {% if submission.status == 'approved' %}text-green-600{% elif submission.status == 'rejected' %}text-red-600{% elif submission.status == 'under_review' %}text-yellow-600{% else %}text-blue-600{% endif %} mr-2"></i>
+                        {% elif submission.file_type == 'xlsx' %}
+                            <i data-lucide="file-spreadsheet" class="w-4 h-4 {% if submission.status == 'approved' %}text-green-600{% elif submission.status == 'rejected' %}text-red-600{% elif submission.status == 'under_review' %}text-yellow-600{% else %}text-blue-600{% endif %} mr-2"></i>
+                        {% elif submission.file_type == 'xbrl' %}
+                            <i data-lucide="file-xml" class="w-4 h-4 {% if submission.status == 'approved' %}text-green-600{% elif submission.status == 'rejected' %}text-red-600{% elif submission.status == 'under_review' %}text-yellow-600{% else %}text-blue-600{% endif %} mr-2"></i>
+                        {% else %}
+                            <i data-lucide="file" class="w-4 h-4 {% if submission.status == 'approved' %}text-green-600{% elif submission.status == 'rejected' %}text-red-600{% elif submission.status == 'under_review' %}text-yellow-600{% else %}text-blue-600{% endif %} mr-2"></i>
+                        {% endif %}
+                        <div>
+                            <div class="text-sm font-medium {% if submission.status == 'approved' %}text-green-900{% elif submission.status == 'rejected' %}text-red-900{% elif submission.status == 'under_review' %}text-yellow-900{% else %}text-blue-900{% endif %}">
+                                {{ submission.institution.name }} - {{ submission.reporting_period|date:"M Y" }}
+                            </div>
+                            <div class="text-xs {% if submission.status == 'approved' %}text-green-700{% elif submission.status == 'rejected' %}text-red-700{% elif submission.status == 'under_review' %}text-yellow-700{% else %}text-blue-700{% endif %}">
+                                Submitted: {{ submission.submission_date|date:"M d, Y" }}
+                                {% if submission.uploaded_file %}
+                                    • <a href="{{ submission.uploaded_file.url }}" class="text-blue-600 hover:text-blue-800" target="_blank">
+                                        {{ submission.uploaded_file.name|slice:"-30:" }}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2 py-1 {% if submission.status == 'approved' %}bg-green-100 text-green-800{% elif submission.status == 'rejected' %}bg-red-100 text-red-800{% elif submission.status == 'under_review' %}bg-yellow-100 text-yellow-800{% else %}bg-blue-100 text-blue-800{% endif %} text-xs rounded-full">
+                            {{ submission.get_status_display }}
+                        </span>
+                        <a href="{% url 'core:ifrs17-submission-detail' submission.id %}" class="text-blue-600 hover:text-blue-800">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                        </a>
+                </div>
+            </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-8">
+                <i data-lucide="file-text" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
+                <p class="text-gray-500">No submissions yet</p>
+                <p class="text-sm text-gray-400">Upload your first IFRS 17 data to get started</p>
+            </div>
+        {% endif %}
+        </div>
+
+                    </div>
+                    
+<!-- Upload Modal -->
+<div id="uploadModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+    <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Upload IFRS 17 Data</h3>
+                <button onclick="closeUploadModal()" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                            </div>
+        
+            <!-- Upload Form -->
+            <form method="post" action="{% url 'core:upload_ifrs17_data' %}" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+                
+                <!-- Duplicate File Warning -->
+                {% if duplicate_file %}
                 <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
-                    <h4 class="font-medium text-yellow-900 mb-3">Reconciliation Errors</h4>
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-yellow-700">Balance Sheet Reconciliation</span>
-                            <span class="font-medium text-yellow-900">€-15,000</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-yellow-700">P&L Reconciliation</span>
-                            <span class="font-medium text-yellow-900">€+8,500</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-yellow-700">Cash Flow Reconciliation</span>
-                            <span class="font-medium text-yellow-900">€-2,300</span>
+                    <div class="flex">
+                        <i data-lucide="alert-triangle" class="w-5 h-5 text-yellow-400 mr-2"></i>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-medium text-yellow-800">File Already Exists</h3>
+                            <div class="mt-2 text-sm text-yellow-700">
+                                <p>A file with the name <strong>"{{ file_name }}"</strong> already exists for <strong>{{ institution.name }}</strong> for the reporting period <strong>{{ reporting_period|date:"F Y" }}</strong>.</p>
+                                <p class="mt-2">Uploaded on: {{ duplicate_file.submission_date|date:"M d, Y H:i" }}</p>
+                                <p class="mt-1">Status: {{ duplicate_file.get_status_display }}</p>
+                            </div>
+                            <div class="mt-3 flex items-center">
+                                <input type="checkbox" id="override_file" name="override_file" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="override_file" class="ml-2 text-sm text-yellow-800">
+                                    Yes, I want to replace the existing file
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Data Quality Issues -->
-                <div class="bg-orange-50 border border-orange-200 rounded-md p-4">
-                    <h4 class="font-medium text-orange-900 mb-3">Data Quality Issues</h4>
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-sm">
-                            <span class="text-orange-700">Missing Data Points</span>
-                            <span class="font-medium text-orange-900">12</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-orange-700">Format Errors</span>
-                            <span class="font-medium text-orange-900">8</span>
-                        </div>
-                        <div class="flex justify-between text-sm">
-                            <span class="text-orange-700">Validation Failures</span>
-                            <span class="font-medium text-orange-900">3</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Audit Trail -->
-        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 lg:col-span-2">
-            <div class="flex items-center mb-4">
-                <i data-lucide="history" class="w-5 h-5 text-purple-600 mr-2"></i>
-                <h2 class="text-lg font-semibold text-gray-900">Audit Trail</h2>
-            </div>
-            
-            <div class="space-y-4">
-                <!-- Recent Activities -->
-                <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
-                    <h4 class="font-medium text-purple-900 mb-3">Recent Activities</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                                    <i data-lucide="user" class="w-4 h-4 text-blue-600"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-medium text-purple-900">John Smith submitted Q3 Solvency Report</div>
-                                    <div class="text-xs text-purple-700">15 Nov 2024, 14:32 • XBRL • 2.3 MB</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Success</span>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                                    <i data-lucide="user" class="w-4 h-4 text-green-600"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-medium text-purple-900">Sarah Johnson validated Risk Dashboard</div>
-                                    <div class="text-xs text-purple-700">5 Dec 2024, 09:15 • XML • 1.8 MB</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Success</span>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3">
-                                    <i data-lucide="user" class="w-4 h-4 text-red-600"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-medium text-purple-900">Mike Wilson attempted IFRS17 Update</div>
-                                    <div class="text-xs text-purple-700">10 Dec 2024, 16:45 • CSV • 0.9 MB</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Failed</span>
-                        </div>
-                        
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
-                                    <i data-lucide="user" class="w-4 h-4 text-yellow-600"></i>
-                                </div>
-                                <div>
-                                    <div class="text-sm font-medium text-purple-900">Lisa Brown reviewed validation errors</div>
-                                    <div class="text-xs text-purple-700">11 Dec 2024, 11:20 • System Action</div>
-                                </div>
-                            </div>
-                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full">Review</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Activity Summary -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
-                        <h4 class="font-medium text-blue-900 mb-2">Most Active Users</h4>
-                        <div class="space-y-1 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-blue-700">John Smith</span>
-                                <span class="font-medium text-blue-900">45 submissions</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-blue-700">Sarah Johnson</span>
-                                <span class="font-medium text-blue-900">38 submissions</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-blue-700">Mike Wilson</span>
-                                <span class="font-medium text-blue-900">32 submissions</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-green-50 border border-green-200 rounded-md p-4">
-                        <h4 class="font-medium text-green-900 mb-2">Submission Times</h4>
-                        <div class="space-y-1 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-green-700">Peak Hours</span>
-                                <span class="font-medium text-green-900">9-11 AM</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-green-700">Avg Processing</span>
-                                <span class="font-medium text-green-900">2.3 min</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-green-700">Success Rate</span>
-                                <span class="font-medium text-green-900">93.5%</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
-                        <h4 class="font-medium text-purple-900 mb-2">System Metrics</h4>
-                        <div class="space-y-1 text-sm">
-                            <div class="flex justify-between">
-                                <span class="text-purple-700">Total Files</span>
-                                <span class="font-medium text-purple-900">247</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-purple-700">Total Size</span>
-                                <span class="font-medium text-purple-900">518 MB</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span class="text-purple-700">Last 30 Days</span>
-                                <span class="font-medium text-purple-900">23 files</span>
-                            </div>
-                        </div>
-                    </div>
+                {% endif %}
+                
+                <!-- Display form errors -->
+                {% if upload_form.errors %}
+                <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                    <div class="flex">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-red-400 mr-2"></i>
+                        <div>
+                            <h3 class="text-sm font-medium text-red-800">Please correct the following errors:</h3>
+                            <div class="mt-2 text-sm text-red-700">
+                                {% for field, errors in upload_form.errors.items %}
+                                    <p><strong>{{ field|title }}:</strong> {{ errors|join:", " }}</p>
+                                {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Data Quality Dashboard -->
-    <div class="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <div class="flex items-center mb-4">
-            <i data-lucide="shield-check" class="w-5 h-5 text-gray-600 mr-2"></i>
-            <h2 class="text-lg font-semibold text-gray-900">Data Quality Dashboard</h2>
+                {% endif %}
+                
+                    <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Select Institution</label>
+                    {{ upload_form.institution }}
+                    {% if upload_form.institution.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ upload_form.institution.errors|join:", " }}</p>
+                    {% endif %}
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div class="bg-green-50 border border-green-200 rounded-md p-4">
-                <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-green-600">Data Completeness</p>
-                        <p class="text-2xl font-bold text-green-700">94.2%</p>
-                    </div>
-                    <i data-lucide="check-circle" class="w-8 h-8 text-green-600"></i>
-                </div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">File Type</label>
+                    {{ upload_form.file_type }}
+                    {% if upload_form.file_type.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ upload_form.file_type.errors|join:", " }}</p>
+                    {% endif %}
             </div>
             
-            <div class="bg-blue-50 border border-blue-200 rounded-md p-4">
-                <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-blue-600">Data Accuracy</p>
-                        <p class="text-2xl font-bold text-blue-700">91.8%</p>
-                    </div>
-                    <i data-lucide="target" class="w-8 h-8 text-blue-600"></i>
-                </div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Reporting Period</label>
+                    {{ upload_form.reporting_period }}
+                    {% if upload_form.reporting_period.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ upload_form.reporting_period.errors|join:", " }}</p>
+                    {% endif %}
             </div>
             
-            <div class="bg-yellow-50 border border-yellow-200 rounded-md p-4">
-                <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-yellow-600">Data Consistency</p>
-                        <p class="text-2xl font-bold text-yellow-700">88.5%</p>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Upload File</label>
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-gray-400 transition-colors" onclick="document.getElementById('id_uploaded_file').click()">
+                        <div class="space-y-1 text-center">
+                            <i data-lucide="upload-cloud" class="mx-auto h-12 w-12 text-gray-400"></i>
+                            <div class="flex text-sm text-gray-600">
+                                <span class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500">
+                                    Upload file
+                                </span>
+                                <p class="pl-1">or drag and drop</p>
                     </div>
-                    <i data-lucide="refresh-cw" class="w-8 h-8 text-yellow-600"></i>
+                            <p class="text-xs text-gray-500">CSV, Excel, XBRL up to 50MB</p>
+                            {{ upload_form.uploaded_file }}
                 </div>
+                </div>
+                {% if upload_form.uploaded_file.errors %}
+                    <p class="mt-1 text-sm text-red-600">{{ upload_form.uploaded_file.errors|join:", " }}</p>
+                {% endif %}
             </div>
             
-            <div class="bg-purple-50 border border-purple-200 rounded-md p-4">
-                <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm text-purple-600">Overall Quality</p>
-                        <p class="text-2xl font-bold text-purple-700">91.5%</p>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Notes (Optional)</label>
+                    {{ upload_form.notes }}
+                    {% if upload_form.notes.errors %}
+                        <p class="mt-1 text-sm text-red-600">{{ upload_form.notes.errors|join:", " }}</p>
+                    {% endif %}
                     </div>
-                    <i data-lucide="award" class="w-8 h-8 text-purple-600"></i>
+                
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-3 pt-4">
+                    <button type="button" onclick="closeUploadModal()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 transition-colors">
+                        Cancel
+                    </button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                        Upload & Validate
+                    </button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
+
+<script>
+    // Upload Modal Functions
+    function openUploadModal() {
+        document.getElementById('uploadModal').classList.remove('hidden');
+        // Set default reporting period to current quarter
+        const now = new Date();
+        const currentQuarter = Math.floor((now.getMonth() + 3) / 3);
+        const quarterEnd = new Date(now.getFullYear(), currentQuarter * 3 - 1, 0);
+        const reportingPeriodInput = document.getElementById('id_reporting_period');
+        if (reportingPeriodInput) {
+            reportingPeriodInput.value = quarterEnd.toISOString().split('T')[0];
+        }
+    }
+    
+    function closeUploadModal() {
+        document.getElementById('uploadModal').classList.add('hidden');
+        const uploadForm = document.querySelector('form[action="{% url 'core:upload_ifrs17_data' %}"]');
+        if (uploadForm) {
+            uploadForm.reset();
+        }
+    }
+    
+    // File upload handling
+    const fileUploadInput = document.getElementById('id_uploaded_file');
+    if (fileUploadInput) {
+        fileUploadInput.addEventListener('change', function(e) {
+            const files = e.target.files;
+            const fileList = document.createElement('div');
+            fileList.className = 'mt-2 space-y-1';
+            
+            Array.from(files).forEach(file => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'flex items-center justify-between p-2 bg-gray-50 rounded-md';
+                fileItem.innerHTML = `
+                    <div class="flex items-center">
+                        <i data-lucide="file" class="w-4 h-4 text-gray-500 mr-2"></i>
+                        <span class="text-sm text-gray-700">${file.name}</span>
+                        <span class="text-xs text-gray-500 ml-2">(${(file.size / 1024 / 1024).toFixed(2)} MB)</span>
 </div>
+                    <span class="text-xs text-green-600">Ready</span>
+                `;
+                fileList.appendChild(fileItem);
+            });
+            
+            // Remove existing file list
+            const existingList = document.querySelector('.file-list');
+            if (existingList) {
+                existingList.remove();
+            }
+            
+            fileList.className += ' file-list';
+            e.target.parentNode.parentNode.appendChild(fileList);
+        });
+    }
+    
+    // Form submission - let Django handle it naturally
+    const uploadForm = document.querySelector('form[action="{% url 'core:upload_ifrs17_data' %}"]');
+    if (uploadForm) {
+        uploadForm.addEventListener('submit', function(e) {
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Uploading...';
+                submitBtn.disabled = true;
+                
+                // Re-enable after a delay (in case of errors)
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+    }
+    
+    // Close modal when clicking outside
+    const uploadModal = document.getElementById('uploadModal');
+    if (uploadModal) {
+        uploadModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeUploadModal();
+            }
+        });
+    }
+</script>
 {% endblock %}

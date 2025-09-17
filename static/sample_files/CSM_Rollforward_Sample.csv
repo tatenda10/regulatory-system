@@ -1,0 +1,10 @@
+Institution,Reporting_Period,Contract_Group,Opening_CSM_Balance,New_Contracts_CSM,Interest_Accretion,Experience_Adjustments,CSM_Release,Closing_CSM_Balance,Currency
+Zimbabwe Insurance Co,Q3-2024,Life Insurance Group A,2100000,450000,125000,-75000,180000,2600000,ZWL
+Zimbabwe Insurance Co,Q3-2024,Health Insurance Group B,1800000,320000,95000,-45000,150000,2125000,ZWL
+Zimbabwe Insurance Co,Q3-2024,Annuity Group C,1200000,280000,75000,-25000,120000,1500000,ZWL
+First Mutual Life,Q3-2024,Life Insurance Group A,3500000,680000,180000,-120000,280000,4040000,ZWL
+First Mutual Life,Q3-2024,Health Insurance Group B,2200000,420000,110000,-65000,180000,2485000,ZWL
+NicozDiamond Insurance,Q3-2024,General Insurance Group A,1500000,380000,85000,-35000,140000,1850000,ZWL
+NicozDiamond Insurance,Q3-2024,General Insurance Group B,1200000,290000,65000,-20000,110000,1445000,ZWL
+FBC Insurance,Q3-2024,Life Insurance Group A,2800000,520000,140000,-85000,220000,3115000,ZWL
+FBC Insurance,Q3-2024,Health Insurance Group B,1900000,350000,95000,-40000,160000,2205000,ZWL

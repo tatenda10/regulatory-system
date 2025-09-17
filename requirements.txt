@@ -3,3 +3,5 @@ python-decouple>=3.8
 Pillow>=10.0.0
 django-tailwind>=3.4.0
 django-browser-reload>=1.9.0
+openpyxl>=3.1.0
+pandas>=2.0.0

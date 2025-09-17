@@ -1,0 +1,4 @@
+Quality_Metric,Completeness_Score,Accuracy_Score,Consistency_Score,Timeliness_Score,Overall_Quality_Score,Data_Governance_Score,Control_Effectiveness,Audit_Trail_Completeness,Regulatory_Compliance,Exchange_Rate_Consistency,Currency_Conversion_Accuracy,Multi_Currency_Reconciliation,Missing_Data_Points,Data_Anomalies,Validation_Errors,Critical_Issues,Issues_Resolved,Pending_Issues,Currency
+ZWL Accounts,95.5,92.8,89.2,96.5,93.5,88.2,85.8,92.1,90.5,true,94.2,true,15,8,12,2,18,5,ZWL
+USD Accounts,93.8,90.5,87.8,94.2,91.6,85.5,82.1,89.8,88.2,true,91.8,true,22,12,18,4,25,8,USD
+Combined Quality,94.7,91.7,88.5,95.4,92.6,86.9,84.0,91.0,89.4,true,93.0,true,37,20,30,6,43,13,Multi

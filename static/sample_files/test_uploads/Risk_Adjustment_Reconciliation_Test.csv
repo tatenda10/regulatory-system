@@ -1,0 +1,5 @@
+Contract_Group,Opening_Risk_Adjustment,New_Contracts_Risk_Adj,Experience_Adjustments,Risk_Adj_Release,Closing_Risk_Adjustment,Risk_Adj_Impact_on_Liabilities,Currency
+Life Insurance Group A,1150000,280000,-45000,180000,1230000,1230000,ZWL
+Health Insurance Group B,920000,220000,-35000,150000,980000,980000,ZWL
+Annuity Group C,680000,180000,-25000,120000,650000,650000,ZWL
+Variable Annuity Group,480000,150000,-20000,100000,520000,520000,ZWL

@@ -1,0 +1,5 @@
+Reinsurance_Type,Reinsurance_Assets,Recoverable_Amounts,Expected_Recoveries,Proportional_Reinsurance,Non_Proportional_Reinsurance,Facultative_Reinsurance,Treaty_Reinsurance,Domestic_Reinsurers,International_Reinsurers,Total_Reinsurance_Held,Risk_Transfer_Ratio,Concentration_Risk,Counterparty_Credit_Risk,Currency
+Life Insurance,1850000,1650000,1750000,1200000,450000,200000,1200000,850000,1000000,1850000,75.5,25.2,15.8,ZWL
+Health Insurance,1200000,1100000,1150000,800000,300000,150000,850000,600000,600000,1200000,68.2,30.5,18.5,ZWL
+General Insurance,950000,850000,900000,600000,250000,100000,650000,450000,500000,950000,72.8,28.1,16.2,ZWL
+Annuity Products,750000,680000,720000,500000,200000,50000,700000,350000,400000,750000,65.5,32.8,20.1,ZWL

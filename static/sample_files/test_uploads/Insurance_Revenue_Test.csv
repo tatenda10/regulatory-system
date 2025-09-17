@@ -1,0 +1,5 @@
+Product_Line,Insurance_Revenue,Service_Revenue,Total_Revenue,Contracts_Fulfilled,Contracts_Ongoing,Service_Performance_Ratio,Currency
+Life Insurance,2500000,450000,2950000,1250,850,68.5,ZWL
+Health Insurance,1800000,320000,2120000,980,620,61.2,ZWL
+General Insurance,1200000,180000,1380000,750,450,62.5,ZWL
+Annuity Products,950000,150000,1100000,420,280,60.0,ZWL
